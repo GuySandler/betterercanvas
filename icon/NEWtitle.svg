@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="170.44157mm"
+   height="25.759138mm"
+   viewBox="0 0 170.44158 25.759138"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="NEWtitle.svg"
+   inkscape:export-filename="NEWtitle.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.2567484"
+     inkscape:cx="404.61558"
+     inkscape:cy="274.9158"
+     inkscape:window-width="1920"
+     inkscape:window-height="966"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="269.51614"
+       y="36.03157"
+       width="89.358299"
+       height="26.663363"
+       id="rect2" />
+    <linearGradient
+       id="linearGradient1"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#ff1818;stop-opacity:1;"
+         offset="0"
+         id="stop1" />
+      <stop
+         style="stop-color:#ff0ec0;stop-opacity:1;"
+         offset="1"
+         id="stop2" />
+    </linearGradient>
+    <rect
+       x="47.451294"
+       y="48.934147"
+       width="705.83801"
+       height="167.56238"
+       id="rect1" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1"
+       id="linearGradient2"
+       x1="48.628906"
+       y1="55.182617"
+       x2="132.06641"
+       y2="55.182617"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,0.47914756)">
+    <text
+       xml:space="preserve"
+       transform="matrix(1.9327416,0,0,1.9327416,-93.120927,-94.167478)"
+       id="text1"
+       style="writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:url(#linearGradient2)"><tspan
+         x="47.451172"
+         y="59.550781"
+         id="tspan3">Better  Canvas</tspan></text>
+    <text
+       xml:space="preserve"
+       transform="matrix(0.76760109,-0.21673916,0.21673916,0.76760109,-150.80119,32.093741)"
+       id="text2"
+       style="writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect2);display:inline;fill:#1845ff;fill-opacity:1"><tspan
+         x="269.51562"
+         y="46.648438"
+         id="tspan5"><tspan
+           style="font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro'"
+           id="tspan4">-er</tspan></tspan></text>
+  </g>
+</svg>

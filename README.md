@@ -1,8 +1,12 @@
-![Better Canvas](/icon/icon-wide.png)
+![Better Canvas](/icon/NEWtitle.png)
 
-# Better Canvas
+# Betterer Canvas
 
-Enhancements to Canvas like dark mode, better todo list, GPA calculator, and more!
+The developer got greedy and decided to make things paid and ruin the UI so I am taking this into my own hands.
+
+They tried to change license but forgot to wipe the codebase for thier MIT licensed version, so this is a fully legal fork.
+
+Enhancements to Canvas AND bettercanvas like dark mode, better todo list, GPA calculator, and more!
 
 ### Supported on
 
@@ -12,12 +16,14 @@ Enhancements to Canvas like dark mode, better todo list, GPA calculator, and mor
 
 ## Inquiries
 
-To contact me, please email ksucpea@gmail.com, or you can open an issue within the "Issues" tab on GitHub.
+To contact me, please email sandlerguy5@gmail.com, or you can open an issue within the "Issues" tab on GitHub.
+
+If you are ksucpea and want to take this down, you can't, and I have [proof of legality](#proof-of-legality)
 
 ## Table of Contents
 
 - [Features](#features)
-- [Installation](#installation)
+- [Dev Installation](#dev-installation)
 - [Usage](#usage)
 - [Version Notes](#version-notes)
 - [Color Reference](#color-reference)
@@ -31,7 +37,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 - Fully customizable dark mode (choose from premade options or manually edit dark mode)
 - Automatic scheduling for dark mode
 - Dashboard card color palletes
-- Themes created by users
+- Themes created by users (broken due to fork)
 - Assignments due list
 - Dashboard notes
 - Better todo list
@@ -46,24 +52,24 @@ Better Canvas introduces improvements to the Canvas user interface:
 - Browser wide popup assignment reminder
 - Preview assignments and announcements from the dashboard
 
-## Installation
+## Dev Installation
 
-To install, run, and build with this repository,
+To install, run, and build with this repository locally,
 
 - Clone the repository locally with
 
 ```bash
-  git clone https://github.com/ksucpea/bettercanvas.git
+  git clone https://github.com/GuySandler/betterercanvas
 ```
 
-- Visit `chrome://extensions` in your browser.
+- Visit `chrome://extensions` in your browser. (replace chrome with your version of chromium)
 - Enable developer mode by toggling the switch in the upper right corner of the viewport.
 - Click the "Load upacked" button in the header.
 - When prompted to open a file, select the root directory of this repository.
 
 ## Usage
 
-To use Better Canvas, select your browser below to install the extension.
+To use Better Canvas, select your browser below to install the extension from a store.
 
 [Chrome](https://chrome.google.com/webstore/detail/better-canvas/cndibmoanboadcifjkjbdpjgfedanolh)
 
@@ -114,8 +120,6 @@ To use Better Canvas, select your browser below to install the extension.
 ### Add a new feature
 
 To add a new feature, please follow these guidelines.
-
-Note: I will probably make this automated in the future but it's a bit of work right now.
 
 #### Identifier
 
@@ -266,13 +270,24 @@ Learn more about tree commands for Linux/Unix [here](https://www.geeksforgeeks.o
 
 Learn more about tree commands for Windows [here](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/tree).
 
+## proof of legality
+
+This is the version right before the monetization of bettercanvas, original license and all.
+here is some proof the lisence was changed and this is based on the reverted MIT version 5.12.6
+![case1](./proof-of-legality/case1.png)
+![case2](./proof-of-legality/case2.png)
+
 ## Authors
 
-#### Owner
+#### Fork Owner
+
+- [Guy](https://github.com/guysandler)
+
+#### Original Owner
 
 - [ksucpea](https://github.com/ksucpea)
 
-#### Contributors
+#### Original Contributors
 
 - [fudgeu](https://github.com/fudgeu)
 - [Tibo Geeraerts](https://github.com/tibogeeraerts)

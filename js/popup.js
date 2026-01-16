@@ -496,7 +496,7 @@ function setup() {
     document.getElementById("save-theme").addEventListener("click", saveCurrentTheme);
 
     // activate submit theme button
-    document.getElementById("submit-theme-btn").addEventListener("click", submitTheme);
+    // document.getElementById("submit-theme-btn").addEventListener("click", submitTheme);
 
     document.getElementById("submit-theme-btn-1").addEventListener("click", () => {
         document.getElementById("submit-popup").classList.add("open");
@@ -537,7 +537,7 @@ function setup() {
     });
 
     // activate theme browser opt in
-    document.getElementById("new_browser_in").addEventListener("click", registerUser);
+    // document.getElementById("new_browser_in").addEventListener("click", registerUser);
 
     document.querySelectorAll(".theme-sort-btn").forEach(btn => {
         btn.addEventListener("click", (e) => {
@@ -560,7 +560,7 @@ function setup() {
         document.getElementById("opt-in").style.display = "block";
     });
 
-    document.getElementById("view-submissions-btn").addEventListener("click", displayMySubmissions);
+    // document.getElementById("view-submissions-btn").addEventListener("click", displayMySubmissions);
     document.getElementById("submit-form-btn").addEventListener("click", displayThemeSubmissionForm);
 
 }
@@ -581,7 +581,7 @@ function displayThemeSubmissionForm() {
     document.getElementById("view-submissions-btn").classList.remove("active");
 }
 
-async function displayMySubmissions() {
+async function displayMySubmissions() { //TODO: remake
     const sync = await chrome.storage.sync.get("id");
     const res = await fetch(`${apiurl}/api/themes/submissions?id=${sync["id"]}`);
     const data = await res.json();
@@ -768,7 +768,7 @@ function shortScore(score) {
 
 let fallback = false;
 
-async function submitTheme() {
+async function submitTheme() { //TODO: remake
 
     const sync = await chrome.storage.sync.get(null);
 
@@ -797,7 +797,7 @@ async function submitTheme() {
         "theme": JSON.stringify(theme)
     });
 
-    fetch(`${apiurl}/api/themes/submit`, {
+    fetch(`${apiurl}/api/themes/submit`, { //
         "method": "POST",
         "body": body,
         "headers": {
@@ -815,7 +815,7 @@ async function submitTheme() {
     });
 }
 
-async function registerUser() {
+async function registerUser() { // TODO: remake
     try {
         let id;
 
@@ -919,7 +919,7 @@ function setLikeTimeout() {
     }, 1000);
 }
 
-async function likeTheme(location, code, score) {
+async function likeTheme(location, code, score) { // TODO: remake
 
     if (likeThemeTimeout === true) return;
 
@@ -966,7 +966,7 @@ async function likeTheme(location, code, score) {
     }
 }
 
-async function getAndLoadTheme(code) {
+async function getAndLoadTheme(code) { // todo: remake
     const key = `themes/${code}`;
     let output = {};
     if (cache[key]) {
@@ -981,7 +981,7 @@ async function getAndLoadTheme(code) {
     importTheme(output);
 }
 
-async function displayThemeListNew(direction) {
+async function displayThemeListNew(direction) { // TODO: remake
     
     document.getElementById("theme-current-sort").textContent = current_sort;
     if (direction === -1 && current_page_num > 1) current_page_num--;
@@ -1041,12 +1041,13 @@ async function displayThemeListNew(direction) {
         const themeBtn = createThemeButton(container, theme);
         themeBtn.addEventListener("click", (e) => {
             if (!e.target.classList.contains("clickable")) return;
-            getAndLoadTheme(theme.code)
+            // getAndLoadTheme(theme.code)
         }); 
 
         const liked = local["liked_themes"].includes(theme.code);
+        // TODO: remake
         const likeBtn = createThemeLikeBtn(themeBtn, liked, theme.score, sync["browser_show_likes"]);
-        likeBtn.addEventListener("click" , (e) => likeTheme(likeBtn, theme.code, theme.score));
+        // likeBtn.addEventListener("click" , (e) => likeTheme(likeBtn, theme.code, theme.score));
 
     });
 
