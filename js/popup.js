@@ -563,6 +563,47 @@ function setup() {
     // document.getElementById("view-submissions-btn").addEventListener("click", displayMySubmissions);
     document.getElementById("submit-form-btn").addEventListener("click", displayThemeSubmissionForm);
 
+    document.getElementById("gpa-plus-minus").addEventListener("click", () => {
+        applyGPAPreset({
+            "A+": { "cutoff": 97, "gpa": 4.0 },
+            "A": { "cutoff": 93, "gpa": 4.0 },
+            "A-": { "cutoff": 90, "gpa": 3.7 },
+            "B+": { "cutoff": 87, "gpa": 3.3 },
+            "B": { "cutoff": 83, "gpa": 3.0 },
+            "B-": { "cutoff": 80, "gpa": 2.7 },
+            "C+": { "cutoff": 77, "gpa": 2.3 },
+            "C": { "cutoff": 73, "gpa": 2.0 },
+            "C-": { "cutoff": 70, "gpa": 1.7 },
+            "D+": { "cutoff": 67, "gpa": 1.3 },
+            "D": { "cutoff": 63, "gpa": 1.0 },
+            "D-": { "cutoff": 60, "gpa": 0.7 },
+            "F": { "cutoff": 0, "gpa": 0 }
+        });
+    });
+    document.getElementById("gpa-by-letter").addEventListener("click", () => {
+        applyGPAPreset({
+            "A+": { "cutoff": 90, "gpa": 4.0 },
+            "A": { "cutoff": 80, "gpa": 4.0 },
+            "A-": { "cutoff": 70, "gpa": 4.0 },
+            "B+": { "cutoff": 65, "gpa": 3.0 },
+            "B": { "cutoff": 60, "gpa": 3.0 },
+            "B-": { "cutoff": 55, "gpa": 3.0 },
+            "C+": { "cutoff": 50, "gpa": 2.0 },
+            "C": { "cutoff": 45, "gpa": 2.0 },
+            "C-": { "cutoff": 40, "gpa": 2.0 },
+            "D+": { "cutoff": 35, "gpa": 1.0 },
+            "D": { "cutoff": 30, "gpa": 1.0 },
+            "D-": { "cutoff": 25, "gpa": 1.0 },
+            "F": { "cutoff": 0, "gpa": 0 }
+        });
+    });
+
+}
+
+function applyGPAPreset(bounds) {
+    chrome.storage.sync.set({ "gpa_calc_bounds": bounds }, () => {
+        displayGPABounds();
+    });
 }
 
 function setupCustomStyle(initial) {

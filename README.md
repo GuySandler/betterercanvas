@@ -299,3 +299,6 @@ here is some proof the lisence was changed and this is based on the reverted MIT
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![Better Canvas](/icon/icon-48.png)
+
+Copyright (c) 2026 Guy Sandler
+
