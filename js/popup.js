@@ -582,18 +582,18 @@ function setup() {
     });
     document.getElementById("gpa-by-letter").addEventListener("click", () => {
         applyGPAPreset({
-            "A+": { "cutoff": 90, "gpa": 4.0 },
-            "A": { "cutoff": 80, "gpa": 4.0 },
-            "A-": { "cutoff": 70, "gpa": 4.0 },
-            "B+": { "cutoff": 65, "gpa": 3.0 },
-            "B": { "cutoff": 60, "gpa": 3.0 },
-            "B-": { "cutoff": 55, "gpa": 3.0 },
-            "C+": { "cutoff": 50, "gpa": 2.0 },
-            "C": { "cutoff": 45, "gpa": 2.0 },
-            "C-": { "cutoff": 40, "gpa": 2.0 },
-            "D+": { "cutoff": 35, "gpa": 1.0 },
-            "D": { "cutoff": 30, "gpa": 1.0 },
-            "D-": { "cutoff": 25, "gpa": 1.0 },
+            "A+": { "cutoff": 97, "gpa": 4.0 },
+            "A": { "cutoff": 93, "gpa": 4.0 },
+            "A-": { "cutoff": 90, "gpa": 4.0 },
+            "B+": { "cutoff": 87, "gpa": 3.0 },
+            "B": { "cutoff": 83, "gpa": 3.0 },
+            "B-": { "cutoff": 89, "gpa": 3.0 },
+            "C+": { "cutoff": 77, "gpa": 2.0 },
+            "C": { "cutoff": 73, "gpa": 2.0 },
+            "C-": { "cutoff": 70, "gpa": 2.0 },
+            "D+": { "cutoff": 67, "gpa": 1.0 },
+            "D": { "cutoff": 63, "gpa": 1.0 },
+            "D-": { "cutoff": 60, "gpa": 1.0 },
             "F": { "cutoff": 0, "gpa": 0 }
         });
     });
