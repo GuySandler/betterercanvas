@@ -5,9 +5,10 @@ let grades = null;
 let announcements = [];
 let options = {};
 let timeCheck = null;
+let reminderCheck = null;
 //let assignmentData = null;
 
-/* 
+/*
 Start
 */
 
@@ -185,10 +186,38 @@ function showExampleReminder() {
     example.querySelector(".bettercanvas-reminder-due").textContent = "This notification will pop up in other pages to remind you of incomplete assignments that are due in less than 6 hours." /*It will notify again at 2 hours if the 'Remind 2x' option is on."*/;
 }
 
+async function ScheduledReminderCheck() {
+    let date = new Date();
+    let currentHour = date.getHours();
+    let currentMinute = date.getMinutes();
+    if (options.scheduledReminderTime) {
+        let [hour, minute] = options.scheduledReminderTime.split(":");
+        if (parseInt(hour) == currentHour && parseInt(minute) == currentMinute) {
+            const container = document.getElementById("bettercanvas-reminders") || makeElement("div", document.body, { "id": "bettercanvas-reminders" });
+            container.style.display = "flex";
+            container.textContent = "";
+            const storage = await chrome.storage.sync.get("reminders");
+            const now = (new Date()).getTime();
+            storage["reminders"].forEach(reminder => {
+                if (reminder.d >= now) {
+                    createReminder(reminder, container);
+                }
+            });
+        }
+    }
+}
+
+function toggleScheduledReminders() {
+    clearInterval(reminderCheck);
+    if (options.scheduledReminder !== true) return;
+    ScheduledReminderCheck();
+    reminderCheck = setInterval(ScheduledReminderCheck, 60000);
+}
+
 isDomainCanvasPage();
 
 function isDomainCanvasPage() {
-    chrome.storage.sync.get(['custom_domain', 'dark_mode', 'dark_preset', 'device_dark', 'remind'], result => {
+    chrome.storage.sync.get(['custom_domain', 'dark_mode', 'dark_preset', 'device_dark', 'remind', 'scheduledReminder', 'scheduledReminderTime'], result => {
         options = result;
         if (result.custom_domain.length && result.custom_domain[0] !== "") {
             for (let i = 0; i < result.custom_domain.length; i++) {
@@ -201,10 +230,15 @@ function isDomainCanvasPage() {
             // if the code reaches this point, its not a canvas page so run the reminders
             setTimeout(reminderWatch, 2000);
             setInterval(reminderWatch, 60000);
+            toggleScheduledReminders();
             // turn the reminders on/off if the option is changed
             chrome.storage.onChanged.addListener((changes) => {
                 Object.keys(changes).forEach(key => {
                     if (key === "remind") reminderWatch();
+                    if (key === "scheduledReminder" || key === "scheduledReminderTime") {
+                        options[key] = changes[key].newValue;
+                        toggleScheduledReminders();
+                    }
                 })
             })
         } else {
@@ -219,6 +253,7 @@ function startExtension() {
     chrome.storage.sync.get(null, result => {
         options = { ...options, ...result };
         toggleAutoDarkMode();
+        toggleScheduledReminders();
         getApiData();
         checkDashboardReady();
         loadCustomFont();
@@ -326,6 +361,10 @@ function applyOptionsChanges(changes) {
             case ("remind"):
                 showExampleReminder();
                 break;
+			case ("scheduledReminder"):
+			case ("scheduledReminderTime"):
+				toggleScheduledReminders();
+				break;
         }
     });
 }
@@ -1260,11 +1299,40 @@ function autoDarkModeCheck() {
     }
 }
 
+async function ScheduledReminderCheck() {
+	let date = new Date();
+	let currentHour = date.getHours();
+	let currentMinute = date.getMinutes();
+	if (options.scheduledReminderTime) {
+		let [hour, minute] = options.scheduledReminderTime.split(":");
+		if (parseInt(hour) == currentHour && parseInt(minute) == currentMinute) {
+			const container = document.getElementById("bettercanvas-reminders") || makeElement("div", document.body, { "id": "bettercanvas-reminders" });
+			container.style.display = "flex";
+			container.textContent = "";
+			const storage = await chrome.storage.sync.get("reminders");
+			const now = (new Date()).getTime();
+			storage["reminders"].forEach(reminder => {
+				if (reminder.d >= now) {
+					createReminder(reminder, container);
+				}
+			});
+		}
+	}
+
+}
+
 function toggleAutoDarkMode() {
     clearInterval(timeCheck);
     if (options.auto_dark && options.auto_dark === false) return;
     autoDarkModeCheck();
     timeCheck = setInterval(autoDarkModeCheck, 60000);
+}
+
+function toggleScheduledReminders() {
+	clearInterval(reminderCheck);
+	if (options.scheduled_reminders === false) return; //TODO: add it to the options thing
+	ScheduledReminderCheck();
+	reminderCheck = setInterval(ScheduledReminderCheck, 60000);
 }
 
 let iframeObserver;
