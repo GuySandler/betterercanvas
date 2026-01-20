@@ -52,6 +52,10 @@ Better Canvas introduces improvements to the Canvas user interface:
 - Browser wide popup assignment reminder
 - Preview assignments and announcements from the dashboard
 
+## Newly added features
+- GPA presets
+- Scheduled Reminder Popups (broken) 
+
 ## Dev Installation
 
 To install, run, and build with this repository locally,
