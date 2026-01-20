@@ -545,12 +545,12 @@ function setup() {
     });
 
     // activate theme browser opt out
-    document.getElementById("new_browser_out").addEventListener("click", () => {
+    // document.getElementById("new_browser_out").addEventListener("click", () => {
         chrome.storage.sync.set({ "new_browser": false });
         current_page_num = 1;
         displayThemeList(0);
-        displayAlert(false, "Success! You are now viewing the old theme browser. This one will no longer recieve updates, but there is still plenty to choose from.");
-    });
+        // displayAlert(false, "Success! You are now viewing the old theme browser. This one will no longer recieve updates, but there is still plenty to choose from.");
+    // });
 
     // activate theme browser opt in
     // document.getElementById("new_browser_in").addEventListener("click", registerUser);
@@ -571,10 +571,10 @@ function setup() {
         document.getElementById("browser-settings-popup").classList.remove("open");
     });
 
-    document.getElementById("reset-optin").addEventListener("click", () => {
-        chrome.storage.sync.set({ "new_browser": null });
-        document.getElementById("opt-in").style.display = "block";
-    });
+    // document.getElementById("reset-optin").addEventListener("click", () => {
+    //     chrome.storage.sync.set({ "new_browser": null });
+    //     document.getElementById("opt-in").style.display = "block";
+    // });
 
     // document.getElementById("view-submissions-btn").addEventListener("click", displayMySubmissions);
     document.getElementById("submit-form-btn").addEventListener("click", displayThemeSubmissionForm);
@@ -829,10 +829,10 @@ async function submitTheme() { //TODO: remake
 
     const sync = await chrome.storage.sync.get(null);
 
-    if (sync["new_browser"] !== true) {
-        displayAlert(true, "You'll need to opt in to the new browser if you want to submit your theme. If you've opted out and want to opt in, you can scroll down to the bottom of this page and opt back in.");
-        return;
-    }
+    // if (sync["new_browser"] !== true) {
+    //     displayAlert(true, "You'll need to opt in to the new browser if you want to submit your theme. If you've opted out and want to opt in, you can scroll down to the bottom of this page and opt back in.");
+    //     return;
+    // }
 
     const theme = await getExport(sync, ["custom_cards", "card_colors", "dark_preset", "custom_font", "gradient_cards", "disable_color_overlay"]);
     const title = document.getElementById("submit-title");
@@ -1215,6 +1215,7 @@ function displaySavedThemes() {
 function getTheme(name) {
 
     // get localThemes from themes.js
+    console.log(themes);
 
     if (name === "all") return themes;
     for (const theme in themes) if (theme.title === name) return theme
@@ -1429,7 +1430,7 @@ function displayAdvancedCards() {
                 };
             });
         } else {
-            document.querySelector(".advanced-cards").innerHTML = `<div class="option-container"><h3>Couldn't find your cards!<br/>You may need to refresh your Canvas page and/or this menu page.<br/><br/>If you're having issues please contact me - ksucpea@gmail.com</h3></div>`;
+            document.querySelector(".advanced-cards").innerHTML = `<div class="option-container"><h3>Couldn't find your cards!<br/>You may need to refresh your Canvas page and/or this menu page.<br/><br/>If you're having issues please contact me - sandlerguy5@gmail.com</h3></div>`;
         }
     });
 }
