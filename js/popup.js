@@ -504,8 +504,18 @@ function setup() {
     });
     document.getElementById("theme-search").addEventListener("change", async (e) => {
         searchFor = e.target.value;
-        current_page_num = 1;
-        displayThemeList(0);
+        console.log(searchFor);
+        // current_page_num = 1;
+        // displayThemeList(0);
+        // linear search
+        let themesToShow = [];
+        for (let i = 0; i < themes.length; i++) {
+            if (themes[i].title.toLowerCase().includes(searchFor.toLowerCase())) {
+                themesToShow.push(themes[i]);
+            }
+        }
+        console.log(themesToShow);
+        displayThemeSearchList(themesToShow);
     });
 
     // activate theme save button
@@ -935,14 +945,14 @@ function saveCurrentTheme() {
 
 
 async function displayThemeList(direction = 0) {
-    const sync = await chrome.storage.sync.get("new_browser");
-    if (sync["new_browser"] === true && fallback === false) {
-        displayThemeListNew(direction);
-    } else {
+    // const sync = await chrome.storage.sync.get("new_browser");
+    // if (sync["new_browser"] === true && fallback === false) {
+        // displayThemeListNew(direction);
+    // } else {
         displayThemeListOld(direction);
-    }
+    // }
     // remove the opt-in notice
-    if (sync["new_browser"] !== null && document.getElementById("opt-in")) document.getElementById("opt-in").style.display = "none";
+    // if (sync["new_browser"] !== null && document.getElementById("opt-in")) document.getElementById("opt-in").style.display = "none";
 }
 
 function createThemeButton(location, theme) {
@@ -1162,6 +1172,39 @@ function displayThemeListOld(pageDir = 0) {
     });
     document.getElementById("premade-themes-pagenum").textContent = current_page_num + " of " + maxPage;
     displaySavedThemes();
+}
+
+function displayThemeSearchList(themesToShow, pageDir = 0) {
+    document.getElementById("theme-current-sort").textContent = current_sort;
+    const perPage = 24;
+    const maxPage = Math.ceil(themesToShow.length / perPage);
+    if (pageDir == -1 && current_page_num > 1) current_page_num--;
+    if (pageDir == 1 && curren_page_num < maxPage) current_page_num++;
+    let container = document.getElementById("premade-themes");
+    container.textContent = "";
+    let start = (current_page_num - 1) * perPage, end = start + perPage;
+    themesToShow.forEach((theme, index) => {
+            if (index < start || index >= end) return;
+            let themeBtn = makeElement("button", container, { "className": "theme-button" });
+            themeBtn.classList.add("customization-button");
+            if (!themeBtn.style.background) themeBtn.style.backgroundImage = "linear-gradient(#00000070, #00000070), url(" + theme.preview + ")";
+            let split = theme.title.split(" by ");
+            makeElement("p", themeBtn, {"className": "theme-button-title", "textContent":  split[0] });
+            makeElement("p", themeBtn, {"className": "theme-button-creator", "textContent": split[1] });
+            themeBtn.addEventListener("click", () => {
+                const allOptions = syncedSwitches.concat(syncedSubOptions).concat(["dark_preset", "custom_cards", "custom_font", "gpa_calc_bounds", "card_colors"]);
+                chrome.storage.sync.get(allOptions, sync => {
+                    chrome.storage.local.get(["previous_theme"], async local => {
+                        if (local["previous_theme"] === null) {
+                            let previous = await getExport(sync, allOptions);
+                            chrome.storage.local.set({ "previous_theme": previous });
+                        }
+                        importTheme(theme.exports);
+                    });
+                });
+            });
+        }
+    )
 }
 
 function getRelativeDate(date, short = false) {

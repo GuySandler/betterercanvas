@@ -55,6 +55,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 ## Newly added features
 - GPA presets
 - Scheduled Reminder Popups (broken) 
+- searching themes (the original didn't actually impliment that)
 
 ## Dev Installation
 
