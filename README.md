@@ -62,7 +62,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 - custom side logo
 - widgets (music, timer)
 - fix darkmode fixer
-- more card settings (Image Size, Roundness, Width, Space Between)
+- more card settings (Image Size, Roundness, Width, Space Between) (in progress, to be theme compatible)
 - calender sync
 - update better todo list
 - better sidebar
@@ -320,6 +320,10 @@ here is some proof the lisence was changed and this is based on the reverted MIT
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+You can fork, modify, and use this code however you like with attributes, but no commercial use.
 
 ![Better Canvas](/icon/icon-48.png)
 

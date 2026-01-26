@@ -623,7 +623,19 @@ function setup() {
             "F": { "cutoff": 0, "gpa": 0 }
         });
     });
-
+    
+    document.getElementById("imageSize").addEventListener("input", (e) => {
+        chrome.storage.sync.set({"imageSize": parseInt(e.target.value)});
+        sendFromPopup("updateCardStyles", { imageSize: parseInt(e.target.value) });
+    })
+    document.getElementById("cardRoundness").addEventListener("input", (e) => {
+        chrome.storage.sync.set({"cardRoundness": parseInt(e.target.value)});
+        sendFromPopup("updateCardStyles", { cardRoundness: parseInt(e.target.value) });
+    })
+    document.getElementById("cardSpacing").addEventListener("input", (e) => {
+        chrome.storage.sync.set({"cardSpacing": parseInt(e.target.value)});
+        sendFromPopup("updateCardStyles", { cardSpacing: parseInt(e.target.value) });
+    })
 }
 
 function applyGPAPreset(bounds) {
