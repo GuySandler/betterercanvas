@@ -86,6 +86,9 @@ const defaultOptions = {
         "card_limit": 25,
         "scheduledReminder": false,
         "scheduledReminderTime": { "hour": "09", "minute": "00" },
+        "imageSize": 100,
+        "cardRoundness": 4,
+        "cardSpacing": 36,
     }
 };
 
@@ -193,6 +196,30 @@ function setupDashboardMethod(initial) {
     });
 }
 
+function setupImageSizeInput(initial) {
+    let el = document.querySelector("#imageSize");
+    el.value = initial;
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "imageSize": e.target.value });
+    });
+}
+
+function setupCardRoundnessInput(initial) {
+    let el = document.querySelector("#cardRoundness");
+    el.value = initial;
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "cardRoundness": e.target.value });
+    });
+}
+
+function setupCardSpacingInput(initial) {
+    let el = document.querySelector("#cardSpacing");
+    el.value = initial;
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "cardSpacing": e.target.value });
+    });
+}
+
 function setup() {
 
     const menu = {
@@ -216,7 +243,10 @@ function setup() {
             { "identifier": "card_limit", "setup": (initial) => setupCardLimitSlider(initial) },
             { "identifier": "card_method_dashboard", "setup": (initial) => setupDashboardMethod(initial) },
             { "identifier": "custom_styles", "setup": (initial) => setupCustomStyle(initial) },
-            { "identifier": "scheduledReminderTime", "setup": (initial) => setupScheduledReminderInput(initial) }
+            { "identifier": "scheduledReminderTime", "setup": (initial) => setupScheduledReminderInput(initial) },
+            { "identifier": "image_size", "setup": (initial) => setupImageSizeInput(initial) },
+            { "identifier": "card_roundness", "setup": (initial) => setupCardRoundnessInput(initial) },
+            { "identifier": "card_spacing", "setup": (initial) => setupCardSpacingInput(initial) }
         ],
     }
 
@@ -625,16 +655,19 @@ function setup() {
     });
     
     document.getElementById("imageSize").addEventListener("input", (e) => {
-        chrome.storage.sync.set({"imageSize": parseInt(e.target.value)});
-        sendFromPopup("updateCardStyles", { imageSize: parseInt(e.target.value) });
+        const value = e.target.value;
+        chrome.storage.sync.set({ "imageSize": value });
+        document.querySelector("#imageSizeValue").textContent = value + "%";
     })
     document.getElementById("cardRoundness").addEventListener("input", (e) => {
-        chrome.storage.sync.set({"cardRoundness": parseInt(e.target.value)});
-        sendFromPopup("updateCardStyles", { cardRoundness: parseInt(e.target.value) });
+        const value = e.target.value;
+        chrome.storage.sync.set({ "cardRoundness": value });
+        document.querySelector("#cardRoundnessValue").textContent = value + "px";
     })
     document.getElementById("cardSpacing").addEventListener("input", (e) => {
-        chrome.storage.sync.set({"cardSpacing": parseInt(e.target.value)});
-        sendFromPopup("updateCardStyles", { cardSpacing: parseInt(e.target.value) });
+        const value = e.target.value;
+        chrome.storage.sync.set({ "cardSpacing": value });
+        document.querySelector("#cardSpacingValue").textContent = value + "px";
     })
 }
 

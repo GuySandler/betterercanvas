@@ -365,6 +365,11 @@ function applyOptionsChanges(changes) {
 			case ("scheduledReminderTime"):
 				toggleScheduledReminders();
 				break;
+            case ("imageSize"):
+            case ("cardRoundness"):
+            case ("cardSpacing"):
+                applyAestheticChanges();
+                break;
         }
     });
 }
@@ -1999,6 +2004,11 @@ function applyAestheticChanges() {
     if (options.disable_color_overlay === true) style.textContent += ".ic-DashboardCard__header_hero{opacity: 0!important} .ic-DashboardCard__header-button-bg{opacity: 1!important}";
     if (options.hide_feedback === true) style.textContent += ".recent_feedback {display: none}";
     if (options.full_width === true) style.textContent += ".ic-Layout-wrapper{max-width:100%!important}";
+
+    if (options.imageSize !== undefined && options.imageSize !== 100) style.textContent += `.ic-DashboardCard__header_image {transform: scale(${options.imageSize / 100})!important; }`;
+    if (options.cardRoundness !== undefined && options.cardRoundness !== 4) style.textContent += `.ic-DashboardCard {border-radius: ${options.cardRoundness}px!important;}`;
+    if (options.cardSpacing !== undefined && options.cardSpacing !== 36) style.textContent += `.ic-DashboardCard {margin: ${options.cardSpacing / 2}px!important;}`;
+
     if (options.custom_styles !== "") style.textContent += options.custom_styles;
     document.documentElement.appendChild(style);
 }

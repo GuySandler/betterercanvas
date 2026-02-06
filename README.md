@@ -56,13 +56,14 @@ Better Canvas introduces improvements to the Canvas user interface:
 - GPA presets
 - Scheduled Reminder Popups (broken) 
 - searching themes (the original didn't actually impliment that)
+- Card Styles (image size, card roundness, card spacing)
 
 ## Planned Features
 - custom backgrounds
 - custom side logo
 - widgets (music, timer)
 - fix darkmode fixer
-- more card settings (Image Size, Roundness, Width, Space Between) (in progress, to be theme compatible)
+- more card settings (Width, Height, Rotation) (in progress, to be theme compatible)
 - calender sync
 - update better todo list
 - better sidebar

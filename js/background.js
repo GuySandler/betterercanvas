@@ -93,6 +93,9 @@ chrome.runtime.onInstalled.addListener(function () {
             "gpa_calc_weighted": true,
             "browser_show_likes": false,
             "custom_styles": "",
+            "imageSize": 100,
+            "cardRoundness": 4,
+            "cardSpacing": 36,
         }
     };
 
