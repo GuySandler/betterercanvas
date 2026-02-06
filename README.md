@@ -2,6 +2,8 @@
 
 # Betterer Canvas
 
+name idea: even better canvas
+
 I don't like the direction bettercanvas (bettercampus) is heading so I forked it
 
 They tried to change license but forgot to wipe the codebase for thier MIT licensed version, so this is a fully legal fork.
@@ -56,14 +58,14 @@ Better Canvas introduces improvements to the Canvas user interface:
 - GPA presets
 - Scheduled Reminder Popups (broken) 
 - searching themes (the original didn't actually impliment that)
-- Card Styles (image size, card roundness, card spacing)
+- Card Styles (image size, card roundness, card spacing, width, height)
 
 ## Planned Features
 - custom backgrounds
 - custom side logo
 - widgets (music, timer)
 - fix darkmode fixer
-- more card settings (Width, Height, Rotation) (in progress, to be theme compatible)
+- more card settings (in progress, to be theme compatible)
 - calender sync
 - update better todo list
 - better sidebar
@@ -75,6 +77,9 @@ Better Canvas introduces improvements to the Canvas user interface:
 - theme history
 - mail assistent
 - transcribe lecture
+- hover assignment preview
+- better what if grade
+- when opening assignments it will show you "if you get a 0 on this your grade will be _"
 
 ## Dev Installation
 

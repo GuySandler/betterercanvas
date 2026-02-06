@@ -368,6 +368,9 @@ function applyOptionsChanges(changes) {
             case ("imageSize"):
             case ("cardRoundness"):
             case ("cardSpacing"):
+            case ("cardWidth"):
+            case ("cardHeight"):
+            case ("customCardStyles"):
                 applyAestheticChanges();
                 break;
         }
@@ -2005,9 +2008,13 @@ function applyAestheticChanges() {
     if (options.hide_feedback === true) style.textContent += ".recent_feedback {display: none}";
     if (options.full_width === true) style.textContent += ".ic-Layout-wrapper{max-width:100%!important}";
 
-    if (options.imageSize !== undefined && options.imageSize !== 100) style.textContent += `.ic-DashboardCard__header_image {transform: scale(${options.imageSize / 100})!important; }`;
-    if (options.cardRoundness !== undefined && options.cardRoundness !== 4) style.textContent += `.ic-DashboardCard {border-radius: ${options.cardRoundness}px!important;}`;
-    if (options.cardSpacing !== undefined && options.cardSpacing !== 36) style.textContent += `.ic-DashboardCard {margin: ${options.cardSpacing / 2}px!important;}`;
+    if (options.customCardStyles === true) {
+        if (options.imageSize !== undefined && options.imageSize !== 100) style.textContent += `.ic-DashboardCard__header_image {transform: scale(${options.imageSize / 100})!important; }`;
+        if (options.cardRoundness !== undefined && options.cardRoundness !== 5) style.textContent += `.ic-DashboardCard {border-radius: ${options.cardRoundness}px!important;}`;
+        if (options.cardSpacing !== undefined && options.cardSpacing !== 0) style.textContent += `.ic-DashboardCard {margin-right: ${options.cardSpacing / 2}px!important; margin-bottom: ${options.cardSpacing / 2}px!important;}`;
+        if (options.cardWidth !== undefined && options.cardWidth !== 10) style.textContent += `.ic-DashboardCard {width: ${options.cardWidth}px!important;}`;
+        if (options.cardHeight !== undefined && options.cardHeight !== 10) style.textContent += `.ic-DashboardCard {height: ${options.cardHeight}px!important;}`;
+    }
 
     if (options.custom_styles !== "") style.textContent += options.custom_styles;
     document.documentElement.appendChild(style);

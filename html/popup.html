@@ -671,7 +671,14 @@
         </div>
         <div class="option-container">
             <h3 class="header-small">More Card Styles</h3>
-            <!-- Image Size, Roundness, Width, Space Between -->
+
+            <div class="sub-options">
+                <div class="sub-option" style="margin-top:5px">
+                    <input type="checkbox" id="customCardStyles" name="customCardStyles">
+                    <label for="customCardStyles" class="sub-text">Custom Card Styles</label>
+                </div>
+            </div>
+
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="sub-option">
                     <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
@@ -689,8 +696,22 @@
                 </div>
                 <div class="sub-option">
                     <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
-                        <span class="sub-text" style="width:75px;">Card Spacing</span>
-                        <input type="number" id="cardSpacing" class="card-input" min="0" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text" style="width:75px;">Extra Card Spacing</span>
+                        <input type="number" id="cardSpacing" class="card-input" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Card Width</span>
+                        <input type="number" id="cardWidth" class="card-input" min="0" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Card Height</span>
+                        <input type="number" id="cardHeight" class="card-input" min="0" max="300" value="1" style="width: 80px;">
                         <span class="sub-text">px</span>
                     </div>
                 </div>

@@ -94,8 +94,11 @@ chrome.runtime.onInstalled.addListener(function () {
             "browser_show_likes": false,
             "custom_styles": "",
             "imageSize": 100,
-            "cardRoundness": 4,
-            "cardSpacing": 36,
+            "cardRoundness": 5,
+            'cardSpacing': 0,
+            "cardWidth": 262,
+            "cardHeight": 150,
+            "customCardStyles": false,
         }
     };
 

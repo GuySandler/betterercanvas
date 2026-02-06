@@ -1,5 +1,5 @@
 const syncedSwitches = ['remind', 'tab_icons', 'hide_feedback', 'dark_mode', 'remlogo', 'full_width', 'auto_dark', 'assignments_due', 'gpa_calc', 'gradient_cards', 'disable_color_overlay', 'dashboard_grades', 'dashboard_notes', 'better_todo', 'condensed_cards'];
-const syncedSubOptions = ['todo_colors', 'device_dark', 'relative_dues', 'card_overdues', 'todo_overdues', 'gpa_calc_prepend', 'auto_dark', 'auto_dark_start', 'auto_dark_end', 'num_assignments', 'assignment_date_format', 'todo_hr24', 'grade_hover', 'hide_completed', 'num_todo_items', 'hover_preview', 'scheduledReminder', 'scheduledReminderTime'];
+const syncedSubOptions = ['todo_colors', 'device_dark', 'relative_dues', 'card_overdues', 'todo_overdues', 'gpa_calc_prepend', 'auto_dark', 'auto_dark_start', 'auto_dark_end', 'num_assignments', 'assignment_date_format', 'todo_hr24', 'grade_hover', 'hide_completed', 'num_todo_items', 'hover_preview', 'scheduledReminder', 'scheduledReminderTime', 'customCardStyles'];
 const localSwitches = [];
 
 //const apiurl = "http://localhost:3000";
@@ -87,8 +87,11 @@ const defaultOptions = {
         "scheduledReminder": false,
         "scheduledReminderTime": { "hour": "09", "minute": "00" },
         "imageSize": 100,
-        "cardRoundness": 4,
-        "cardSpacing": 36,
+        "cardRoundness": 5,
+        "cardSpacing": 0,
+        "cardWidth": 262,
+        "cardHeight": 150,
+        "customCardStyles": false,
     }
 };
 
@@ -220,11 +223,27 @@ function setupCardSpacingInput(initial) {
     });
 }
 
+function setupCardWidthInput(initial) {
+    let el = document.querySelector("#cardWidth");
+    el.value = initial;
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "cardWidth": e.target.value });
+    });
+}
+
+function setupCardHeightInput(initial) {
+    let el = document.querySelector("#cardheight");
+    el.value = initial;
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "cardheight": e.target.value });
+    });
+}
+
 function setup() {
 
     const menu = {
         "switches": syncedSwitches,
-        "checkboxes": ['browser_show_likes', 'gpa_calc_weighted', 'gpa_calc_cumulative', /*'card_method_date',*/ 'show_updates', 'todo_colors', 'device_dark', 'relative_dues', 'card_overdues', 'todo_overdues', 'gpa_calc_prepend', 'auto_dark', 'assignment_date_format', 'todo_hr24', 'grade_hover', 'hide_completed', 'hover_preview', 'scheduledReminder'],
+        "checkboxes": ['browser_show_likes', 'gpa_calc_weighted', 'gpa_calc_cumulative', /*'card_method_date',*/ 'show_updates', 'todo_colors', 'device_dark', 'relative_dues', 'card_overdues', 'todo_overdues', 'gpa_calc_prepend', 'auto_dark', 'assignment_date_format', 'todo_hr24', 'grade_hover', 'hide_completed', 'hover_preview', 'scheduledReminder', 'customCardStyles'],
         "tabs": {
             "advanced-settings": { "setup": displayAdvancedCards, "tab": ".advanced" },
             "gpa-bounds-btn": { "setup": displayGPABounds, "tab": ".gpa-bounds-container" },
@@ -244,9 +263,11 @@ function setup() {
             { "identifier": "card_method_dashboard", "setup": (initial) => setupDashboardMethod(initial) },
             { "identifier": "custom_styles", "setup": (initial) => setupCustomStyle(initial) },
             { "identifier": "scheduledReminderTime", "setup": (initial) => setupScheduledReminderInput(initial) },
-            { "identifier": "image_size", "setup": (initial) => setupImageSizeInput(initial) },
-            { "identifier": "card_roundness", "setup": (initial) => setupCardRoundnessInput(initial) },
-            { "identifier": "card_spacing", "setup": (initial) => setupCardSpacingInput(initial) }
+            { "identifier": "imageSize", "setup": (initial) => setupImageSizeInput(initial) },
+            { "identifier": "cardRoundness", "setup": (initial) => setupCardRoundnessInput(initial) },
+            { "identifier": "cardSpacing", "setup": (initial) => setupCardSpacingInput(initial) },
+            { "identifier": "cardWidth", "setup": (initial) => setupCardWidthInput(initial) },
+            { "identifier": "cardHeight", "setup": (initial) => setupCardHeightInput(initial) },
         ],
     }
 
@@ -669,6 +690,16 @@ function setup() {
         chrome.storage.sync.set({ "cardSpacing": value });
         document.querySelector("#cardSpacingValue").textContent = value + "px";
     })
+    document.getElementById("cardWidth").addEventListener("input", (e) => {
+        const value = e.target.value;
+        chrome.storage.sync.set({ "cardWidth": value });
+        document.querySelector("#cardWidthValue").textContent = value + "%";
+    });
+    document.getElementById("cardHeight").addEventListener("input", (e) => {
+        const value = e.target.value;
+        chrome.storage.sync.set({ "cardHeight": value });
+        document.querySelector("#cardHeightValue").textContent = value + "%";
+    });
 }
 
 function applyGPAPreset(bounds) {
