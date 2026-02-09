@@ -188,6 +188,14 @@ input[type="checkbox"]:checked {background: #8dd28d;}
 .submitted-theme-tag {border-radius: 4px;padding: 3px 4px;max-width:min-content;font-weight: 600;}
 #custom-styles {min-height: 100px;}
 
+.card-file-input {background: #2a2a2a;border: 1px solid #4a4a4a;border-radius: 4px;color: #fff;padding: 8px 12px;font-size: 14px;font-family: inherit;margin-top: 8px;transition: border-color 0.2s ease;}
+.card-file-input:hover {border-color: #6a6a6a;}
+.card-file-input:focus {outline: none;border-color: #007acc;box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);}
+.card-file-input::file-selector-button {background: #404040;border: 1px solid #5a5a5a;border-radius: 3px;color: #fff;padding: 6px 12px;margin-right: 12px;font-size: 13px;cursor: pointer;transition: background-color 0.2s ease;}
+.card-file-input::file-selector-button:hover {background: #4a4a4a;}
+.card-file-input::-webkit-file-upload-button {background: #404040;border: 1px solid #5a5a5a;border-radius: 3px;color: #fff;padding: 6px 12px;margin-right: 12px;font-size: 13px;cursor: pointer;transition: background-color 0.2s ease;}
+.card-file-input::-webkit-file-upload-button:hover {background: #4a4a4a;}
+
 ::-webkit-scrollbar {width: 8px;}
 ::-webkit-scrollbar-track {background: #161616;}
 ::-webkit-scrollbar-thumb {background: #323232;border-radius:2px;}

@@ -99,6 +99,8 @@ chrome.runtime.onInstalled.addListener(function () {
             "cardWidth": 262,
             "cardHeight": 250,
             "customCardStyles": false,
+            "customBackgroundLink": "",
+            "customBackgroundUpload": "",
         }
     };
 

@@ -117,6 +117,8 @@ const defaultOptions = {
         "cardWidth": 262,
         "cardHeight": 250,
         "customCardStyles": false,
+        "customBackgroundLink": "",
+        "customBackgroundUpload": "",
     }
 };
 
@@ -264,6 +266,34 @@ function setupCardHeightInput(initial) {
 	});
 }
 
+function setupCustomBackgroundLink(initial) {
+    let el = document.querySelector("#customBackgroundLink");
+    el.value = initial || "";
+    el.addEventListener("input", (e) => {
+        chrome.storage.sync.set({ "customBackgroundLink": e.target.value });
+    })
+}
+
+function setupCustomBackgroundUpload(initial) {
+    let el = document.querySelector("#customBackgroundUpload");
+    el.addEventListener("change", handleBackgroundUpload);
+}
+function handleBackgroundUpload(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const base64 = event.target.result;
+            chrome.storage.sync.set({
+                "customBackgroundUpload": base64,
+                "customBackgroundLink": ""
+            });
+            document.querySelector("#customBackgroundLink").value = "Using uploaded file";
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
 function setup() {
 
     const menu = {
@@ -293,6 +323,8 @@ function setup() {
             { "identifier": "cardSpacing", "setup": (initial) => setupCardSpacingInput(initial) },
             { "identifier": "cardWidth", "setup": (initial) => setupCardWidthInput(initial) },
             { "identifier": "cardHeight", "setup": (initial) => setupCardHeightInput(initial) },
+            { "identifier": "customBackgroundLink", "setup": (initial) => setupCustomBackgroundLink(initial)},
+            { "identifier": "customBackgroundUpload", "setup": (initial) => setupCustomBackgroundUpload(initial)},
         ],
     }
 
@@ -728,6 +760,15 @@ function setup() {
 		chrome.storage.sync.set({ "cardHeight": value });
 		document.querySelector("#cardHeightValue").textContent = value + "%";
 	});
+
+    document.getElementById("clearCustomBackground").addEventListener("click", () => {
+         chrome.storage.sync.set({ 
+            "customBackgroundLink": "",
+            "customBackgroundUpload": ""
+        });
+        document.querySelector("#customBackgroundLink").value = "";
+        document.querySelector("#customBackgroundUpload").value = "";
+    });
 }
 
 function applyGPAPreset(bounds) {

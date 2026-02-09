@@ -260,6 +260,7 @@ function startExtension() {
         applyAestheticChanges();
         changeFavicon();
         updateReminders();
+        applyCustomBackground();
         //getClassAverages();
         setTimeout(() => runDarkModeFixer(false), 800);
         setTimeout(() => runDarkModeFixer(false), 4500);
@@ -373,8 +374,29 @@ function applyOptionsChanges(changes) {
             case ("customCardStyles"):
                 applyAestheticChanges();
                 break;
+            case ("customBackgroundLink"):
+            case ("customBackgroundUpload"):
+                applyCustomBackground();
+                break;
         }
     });
+}
+
+function applyCustomBackground() {
+    // let style = document.querySelector("#DashboardCard_Container")
+    let style = document.querySelector("#bettercanvas-background") || document.createElement('style');
+    style.id = "bettercanvas-background";
+    
+    if (options.customBackgroundUpload && options.customBackgroundUpload !== "") {
+        style.textContent = `#not_right_side { background-image: url('${options.customBackgroundUpload}') !important; background-size: cover !important; background-attachment: fixed !important; }`;
+    } else if (options.customBackgroundLink && options.customBackgroundLink !== "") {
+        style.textContent = `#not_right_side { background-image: url('${options.customBackgroundLink}') !important; background-size: cover !important; background-attachment: fixed !important; }
+        .ic-Dashboard-header__layout { background: none !important; }`; // try to make this hide things underneath and add to other side
+    } else {
+        style.textContent = "";
+    }
+    
+    document.documentElement.appendChild(style);
 }
 
 let insertTimer;

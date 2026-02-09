@@ -2,7 +2,7 @@
 
 # Betterer Canvas
 
-name idea: even better canvas
+name idea: even better canvas or Actually Better Canvas (ABC)
 
 I don't like the direction bettercanvas (bettercampus) is heading so I forked it
 
@@ -12,9 +12,9 @@ Enhancements to Canvas AND bettercanvas like dark mode, better todo list, GPA ca
 
 ### Supported on
 
-![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
+<!-- ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) -->
 
-![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
+<!-- ![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white) -->
 
 ## Inquiries
 
@@ -58,7 +58,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 - GPA presets
 - Scheduled Reminder Popups (broken) 
 - searching themes (the original didn't actually impliment that)
-- Card Styles (image size, card roundness, card spacing, width, height)
+- Card Styles (image size, card roundness, card spacing, width, height, theme compatible)
 
 ## Planned Features
 - custom backgrounds
@@ -79,11 +79,17 @@ Better Canvas introduces improvements to the Canvas user interface:
 - hover assignment preview
 - better what if grade
 - when opening assignments it will show you "if you get a 0 on this your grade will be _"
+- grade leaderboard per class (opt in)
+- global search
+- module sorting
+- quick modules button
 
 ## Extra features that might be added:
 - card grade position, card outline
 - theme copy button
 - revamp cards page UI
+- streaks
+- caching pages for faster loading
 
 ## Dev Installation
 
