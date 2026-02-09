@@ -97,7 +97,7 @@ chrome.runtime.onInstalled.addListener(function () {
             "cardRoundness": 5,
             'cardSpacing': 0,
             "cardWidth": 262,
-            "cardHeight": 150,
+            "cardHeight": 250,
             "customCardStyles": false,
         }
     };

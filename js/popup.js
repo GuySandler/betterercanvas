@@ -1,5 +1,30 @@
 const syncedSwitches = ['remind', 'tab_icons', 'hide_feedback', 'dark_mode', 'remlogo', 'full_width', 'auto_dark', 'assignments_due', 'gpa_calc', 'gradient_cards', 'disable_color_overlay', 'dashboard_grades', 'dashboard_notes', 'better_todo', 'condensed_cards'];
-const syncedSubOptions = ['todo_colors', 'device_dark', 'relative_dues', 'card_overdues', 'todo_overdues', 'gpa_calc_prepend', 'auto_dark', 'auto_dark_start', 'auto_dark_end', 'num_assignments', 'assignment_date_format', 'todo_hr24', 'grade_hover', 'hide_completed', 'num_todo_items', 'hover_preview', 'scheduledReminder', 'scheduledReminderTime', 'customCardStyles'];
+const syncedSubOptions = [
+	"todo_colors",
+	"device_dark",
+	"relative_dues",
+	"card_overdues",
+	"todo_overdues",
+	"gpa_calc_prepend",
+	"auto_dark",
+	"auto_dark_start",
+	"auto_dark_end",
+	"num_assignments",
+	"assignment_date_format",
+	"todo_hr24",
+	"grade_hover",
+	"hide_completed",
+	"num_todo_items",
+	"hover_preview",
+	"scheduledReminder",
+	"scheduledReminderTime",
+	"customCardStyles",
+	"imageSize",
+	"cardRoundness",
+	"cardSpacing",
+	"cardWidth",
+	"cardHeight",
+];
 const localSwitches = [];
 
 //const apiurl = "http://localhost:3000";
@@ -90,7 +115,7 @@ const defaultOptions = {
         "cardRoundness": 5,
         "cardSpacing": 0,
         "cardWidth": 262,
-        "cardHeight": 150,
+        "cardHeight": 250,
         "customCardStyles": false,
     }
 };
@@ -232,11 +257,11 @@ function setupCardWidthInput(initial) {
 }
 
 function setupCardHeightInput(initial) {
-    let el = document.querySelector("#cardheight");
-    el.value = initial;
-    el.addEventListener("input", (e) => {
-        chrome.storage.sync.set({ "cardheight": e.target.value });
-    });
+	let el = document.querySelector("#cardHeight");
+	el.value = initial;
+	el.addEventListener("input", (e) => {
+		chrome.storage.sync.set({ "cardHeight": e.target.value });
+	});
 }
 
 function setup() {
@@ -449,6 +474,9 @@ function setup() {
                             case "export-gpa":
                                 final = { ...final, ...(await getExport(storage, ["gpa_calc_bounds"])) }
                                 break;
+							case "export-customStyles":
+								final = { ...final, ...(await getExport(storage, ["custom_styles"])) };
+								break;
                         }
                     }
                 }
@@ -696,10 +724,10 @@ function setup() {
         document.querySelector("#cardWidthValue").textContent = value + "%";
     });
     document.getElementById("cardHeight").addEventListener("input", (e) => {
-        const value = e.target.value;
-        chrome.storage.sync.set({ "cardHeight": value });
-        document.querySelector("#cardHeightValue").textContent = value + "%";
-    });
+		const value = e.target.value;
+		chrome.storage.sync.set({ "cardHeight": value });
+		document.querySelector("#cardHeightValue").textContent = value + "%";
+	});
 }
 
 function applyGPAPreset(bounds) {
@@ -778,6 +806,14 @@ async function getExport(storage, options) {
                     console.log(e);
                 }
                 break;
+			case "custom_styles":
+				final["customCardStyles"] = storage["customCardStyles"];
+				final["imageSize"] = storage["imageSize"];
+				final["cardRoundness"] = storage["cardRoundness"];
+				final["cardSpacing"] = storage["cardSpacing"];
+				final["cardWidth"] = storage["cardWidth"];
+				final["cardHeight"] = storage["cardHeight"];
+				break;
             default:
                 final[option] = storage[option];
         }

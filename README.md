@@ -65,7 +65,6 @@ Better Canvas introduces improvements to the Canvas user interface:
 - custom side logo
 - widgets (music, timer)
 - fix darkmode fixer
-- more card settings (in progress, to be theme compatible)
 - calender sync
 - update better todo list
 - better sidebar
@@ -80,6 +79,11 @@ Better Canvas introduces improvements to the Canvas user interface:
 - hover assignment preview
 - better what if grade
 - when opening assignments it will show you "if you get a 0 on this your grade will be _"
+
+## Extra features that might be added:
+- card grade position, card outline
+- theme copy button
+- revamp cards page UI
 
 ## Dev Installation
 
