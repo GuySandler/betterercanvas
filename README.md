@@ -61,7 +61,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 - Card Styles (image size, card roundness, card spacing, width, height, theme compatible)
 
 ## Planned Features
-- custom backgrounds
+- custom backgrounds (uploaded files, theme compatible, cached?)
 - custom side logo
 - widgets (music, timer)
 - fix darkmode fixer
@@ -90,6 +90,7 @@ Better Canvas introduces improvements to the Canvas user interface:
 - revamp cards page UI
 - streaks
 - caching pages for faster loading
+- liquid glass theme?
 
 ## Dev Installation
 
