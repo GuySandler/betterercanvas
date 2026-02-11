@@ -57,32 +57,22 @@ Better Canvas introduces improvements to the Canvas user interface:
 ## Newly added features
 - GPA presets
 - Scheduled Reminder Popups (broken) 
-- searching themes (the original didn't actually impliment that)
+- Searching themes (the original didn't actually impliment that)
 - Card Styles (image size, card roundness, card spacing, width, height, theme compatible)
+- Custom Background (by URL, theme compatible)
 
-## Planned Features
-- custom backgrounds (uploaded files, theme compatible, cached?)
-- custom side logo
+## Planned Features (by priority)
+- popup UI revamp
 - widgets (music, timer)
-- fix darkmode fixer
-- calender sync
-- update better todo list
+- update better todo list (with hover assignment preview)
 - better sidebar
-- flashcards
-- better calender
 - better notes
-- goals
-- auto rotate theme
-- theme history
-- mail assistent
-- transcribe lecture
-- hover assignment preview
+- auto rotate theme + theme history + fix theme submissions
+- mail assistent + ui revamp
+- better calender (+ calender sync)
 - better what if grade
-- when opening assignments it will show you "if you get a 0 on this your grade will be _"
-- grade leaderboard per class (opt in)
 - global search
-- module sorting
-- quick modules button
+- fix darkmode fixer
 
 ## Extra features that might be added:
 - card grade position, card outline
@@ -91,6 +81,17 @@ Better Canvas introduces improvements to the Canvas user interface:
 - streaks
 - caching pages for faster loading
 - liquid glass theme?
+- animated backgrounds, rotating background, time/weather reactive backgrounds, maybe chache if it becomes an issue
+- custom side logo
+- transcribe lecture (if there is demand for it)
+- flashcards
+- goals
+
+## Community suggestions (maybe will be done at some point)
+- when opening assignments it will show you "if you get a 0 on this your grade will be _"
+- quick modules button on cards
+- module sorting (newest, oldest) (maybe grid view)
+- grade leaderboard per class (opt in)
 
 ## Dev Installation
 

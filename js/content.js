@@ -391,7 +391,7 @@ function applyCustomBackground() {
     
     if (options.customBackgroundLink && options.customBackgroundLink !== "") {
         style.textContent = `
-        #not_right_side { 
+        #wrapper {
             background-image: url('${options.customBackgroundLink}') !important;
             background-size: cover !important;
             background-attachment: fixed !important; 
@@ -407,6 +407,10 @@ function applyCustomBackground() {
     }
     
     document.documentElement.appendChild(style);
+}
+function clearCustomBackground() {
+	let style = document.querySelector("#bettercanvas-background");
+	if (style) style.remove();
 }
 
 let insertTimer;
@@ -465,6 +469,7 @@ function recieveMessage(request, sender, sendResponse) {
         case ("getcolors"): sendResponse(getCardColors()); break;
         case ("inspect"): sendResponse(inspectDarkMode(true)); break;
         case ("fixdm"): sendResponse(runDarkModeFixer(true)); break;
+		case ("updateBackground"): clearCustomBackground(); sendResponse(true); break;
         default: sendResponse(true);
     }
 }

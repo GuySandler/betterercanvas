@@ -24,6 +24,7 @@ const syncedSubOptions = [
 	"cardSpacing",
 	"cardWidth",
 	"cardHeight",
+	"customBackgroundLink",
 ];
 const localSwitches = [];
 
@@ -487,6 +488,9 @@ function setup() {
 							case "export-customStyles":
 								final = { ...final, ...(await getExport(storage, ["custom_styles"])) };
 								break;
+							case "export-background":
+								final = { ...final, ...(await getExport(storage, ["customBackgroundLink"])) };
+								break;
                         }
                     }
                 }
@@ -740,10 +744,9 @@ function setup() {
 	});
 
     document.getElementById("clearCustomBackground").addEventListener("click", () => {
-         chrome.storage.sync.set({ 
-            "customBackgroundLink": "",
-        });
+        chrome.storage.sync.set({ "customBackgroundLink": "" });
         document.querySelector("#customBackgroundLink").value = "";
+		sendFromPopup("updateBackground");
     });
 }
 
@@ -1061,7 +1064,13 @@ function saveCurrentTheme() {
                 "dark_preset": current["dark_preset"],
                 "custom_cards": current["custom_cards"],
                 "card_colors": current["card_colors"] === null ? [current["dark_preset"]["links"]] : current["card_colors"],
-                "custom_font": current["custom_font"]
+                "custom_font": current["custom_font"],
+				"imageSize": current["imageSize"],
+				"cardRoundness": current["cardRoundness"],
+				"cardSpacing": current["cardSpacing"],
+				"cardWidth": current["cardWidth"],
+				"cardHeight": current["cardHeight"],
+				"customBackgroundLink": current["customBackgroundLink"],
             }
             const now = new Date();
             local["saved_themes"][now.getTime()] = trimmed;
