@@ -916,28 +916,6 @@ function clickout() {
     }, 10);
 }
 
-/*
-function sortThemes(method) {
-    const sortMethods = ["Popular", "ABC", "New", "Old"];
-    const index = sortMethods.indexOf(method);
-    const next = index + 1 === sortMethods.length ? 0 : index + 1;
-    current_sort = sortMethods[next];
-    allThemes = themeSortFn(current_sort);
-    document.querySelectorAll(".theme-sort-btn").forEach(btn => {
-        if (btn.id.includes(method)) {
-            btn.style.color = "#fff";
-            btn.style.background = "var(--inputbg)"
-        } else {
-            btn.style.color = "#adadad";
-            btn.style.background = "none"
-        }
-    });
-    current_page_num = 1;
-    displayThemeList(0);
-    //cache = {};
-}
-    */
-
 // shuffle function for the score sorting so theres no order bias
 function shuffle (arr) {
     var j, x, index;
@@ -1546,129 +1524,216 @@ function setCustomImage(key, val) {
 function displayAdvancedCards() {
     sendFromPopup("getCards");
     chrome.storage.sync.get(["custom_cards", "custom_cards_2"], storage => {
-        document.querySelector(".advanced-cards").innerHTML = '<div id="advanced-current"></div><div id="advanced-past"><h2>Past Courses</h2></div>';
-        const keys = storage["custom_cards"] ? Object.keys(storage["custom_cards"]) : [];
-        if (keys.length > 0) {
-            let currentEnrollment = keys.reduce((max, key) => storage["custom_cards"][key]?.eid > max ? storage["custom_cards"][key].eid : max, -1);
-            keys.forEach(key => {
-                let term = document.querySelector("#advanced-past");
-                if (storage["custom_cards"][key].eid === currentEnrollment) {
-                    term = document.querySelector("#advanced-current");
-                }
-                let card = storage["custom_cards"][key];
-                let card_2 = storage["custom_cards_2"][key] || {};
-                if (!card || !card_2 || !card_2["links"] || card_2["links"]["custom"]) {
-                    console.log(key + " error...");
-                    console.log("card = ", card, "card_2", card_2, "links", card_2["links"]);
-                } else {
-                    let container = makeElement("div", term, { "className": "custom-card" });
-                    container.classList.add("option-container");
-                    container.innerHTML = '<div class="custom-card-header"><p class="custom-card-title"></p><div class="custom-card-hide"><p class="custom-key">Hide</p></div></div><div class="custom-card-inputs"><div class="custom-card-left"><div class="custom-card-image"><span class="custom-key">Image</span></div><div class="custom-card-name"><span class="custom-key">Name</span></div><div class="custom-card-code"><span class="custom-key">Code</span></div></div><div class="custom-links-container"><p class="custom-key">Links</p><div class="custom-links"></div></div></div>';
-                    let imgInput = makeElement("input", container.querySelector(".custom-card-image"), { "className": "card-input" });
-                    let nameInput = makeElement("input",  container.querySelector(".custom-card-name"), { "className": "card-input" });
-                    let codeInput = makeElement("input", container.querySelector(".custom-card-code"), { "className": "card-input" });
-                    let hideInput = makeElement("input", container.querySelector(".custom-card-hide"), { "className": "card-input-checkbox" });
-                    imgInput.placeholder = "Image url";
-                    nameInput.placeholder = "Custom name";
-                    codeInput.placeholder = "Custom code";
-                    hideInput.type = "checkbox";
-                    imgInput.value = card.img;
-                    nameInput.value = card.name;
-                    codeInput.value = card.code;
-                    hideInput.checked = card.hidden;
-                    if (card.img && card.img !== "") container.style.background = "linear-gradient(155deg, #1e1e1eeb 20%, #1e1e1ecc), url(\"" + card.img + "\") center / cover no-repeat";
-                    imgInput.addEventListener("change", e => {
-                        setCustomImage(key, e.target.value);
-                        container.style.background = e.target.value === "" ? "var(--containerbg)" : "linear-gradient(155deg, #1e1e1eeb 20%, #1e1e1ecc), url(\"" + e.target.value + "\") center / cover no-repeat";
-                    });
-                    nameInput.addEventListener("change", function (e) { updateCards(key, { "name": e.target.value }) });
-                    codeInput.addEventListener("change", function (e) { updateCards(key, { "code": e.target.value }) });
-                    hideInput.addEventListener("change", function (e) { updateCards(key, { "hidden": e.target.checked }) });
-                    container.querySelector(".custom-card-title").textContent = card.default;
+        // document.querySelector(".advanced-cards").innerHTML = '<div id="advanced-current"></div><div id="advanced-past"><h2>Past Courses</h2></div>';
+        // const keys = storage["custom_cards"] ? Object.keys(storage["custom_cards"]) : [];
+        // if (keys.length > 0) {
+        //     let currentEnrollment = keys.reduce((max, key) => storage["custom_cards"][key]?.eid > max ? storage["custom_cards"][key].eid : max, -1);
+        //     keys.forEach(key => {
+        //         let term = document.querySelector("#advanced-past");
+        //         if (storage["custom_cards"][key].eid === currentEnrollment) {
+        //             term = document.querySelector("#advanced-current");
+        //         }
+        //         let card = storage["custom_cards"][key];
+        //         let card_2 = storage["custom_cards_2"][key] || {};
+        //         if (!card || !card_2 || !card_2["links"] || card_2["links"]["custom"]) {
+        //             console.log(key + " error...");
+        //             console.log("card = ", card, "card_2", card_2, "links", card_2["links"]);
+        //         } else {
+        //             let container = makeElement("div", term, { "className": "custom-card" });
+        //             container.classList.add("option-container");
+        //             container.innerHTML = '<div class="custom-card-header"><p class="custom-card-title"></p><div class="custom-card-hide"><p class="custom-key">Hide</p></div></div><div class="custom-card-inputs"><div class="custom-card-left"><div class="custom-card-image"><span class="custom-key">Image</span></div><div class="custom-card-name"><span class="custom-key">Name</span></div><div class="custom-card-code"><span class="custom-key">Code</span></div></div><div class="custom-links-container"><p class="custom-key">Links</p><div class="custom-links"></div></div></div>';
+        //             let imgInput = makeElement("input", container.querySelector(".custom-card-image"), { "className": "card-input" });
+        //             let nameInput = makeElement("input",  container.querySelector(".custom-card-name"), { "className": "card-input" });
+        //             let codeInput = makeElement("input", container.querySelector(".custom-card-code"), { "className": "card-input" });
+        //             let hideInput = makeElement("input", container.querySelector(".custom-card-hide"), { "className": "card-input-checkbox" });
+        //             imgInput.placeholder = "Image url";
+        //             nameInput.placeholder = "Custom name";
+        //             codeInput.placeholder = "Custom code";
+        //             hideInput.type = "checkbox";
+        //             imgInput.value = card.img;
+        //             nameInput.value = card.name;
+        //             codeInput.value = card.code;
+        //             hideInput.checked = card.hidden;
+        //             if (card.img && card.img !== "") container.style.background = "linear-gradient(155deg, #1e1e1eeb 20%, #1e1e1ecc), url(\"" + card.img + "\") center / cover no-repeat";
+        //             imgInput.addEventListener("change", e => {
+        //                 setCustomImage(key, e.target.value);
+        //                 container.style.background = e.target.value === "" ? "var(--containerbg)" : "linear-gradient(155deg, #1e1e1eeb 20%, #1e1e1ecc), url(\"" + e.target.value + "\") center / cover no-repeat";
+        //             });
+        //             nameInput.addEventListener("change", function (e) { updateCards(key, { "name": e.target.value }) });
+        //             codeInput.addEventListener("change", function (e) { updateCards(key, { "code": e.target.value }) });
+        //             hideInput.addEventListener("change", function (e) { updateCards(key, { "hidden": e.target.checked }) });
+        //             container.querySelector(".custom-card-title").textContent = card.default;
 
-                    for (let i = 0; i < 4; i++) {
-                        let customLink = makeElement("input", container.querySelector(".custom-links"), { "className": "card-input" });
-                        customLink.value = card_2.links[i].is_default ? "default" : card_2.links[i].path;
-                        customLink.addEventListener("change", function (e) {
-                            chrome.storage.sync.get("custom_cards_2", storage => {
-                                let newLinks = storage.custom_cards_2[key].links;
-                                if (e.target.value === "" || e.target.value === "default") {
-                                    console.log("this value is empty....")
-                                    //newLinks[i] = { "type": storage.custom_cards_2[key].links.default[i].type, "default": true };
-                                    newLinks[i] = { "default": newLinks[i].default, "is_default": true, "path": newLinks[i].default };
-                                    customLink.value = "default";
-                                } else {
-                                    //newLinks[i] = { "type": getLinkType(e.target.value), "path": e.target.value, "default": false };
-                                    let val = e.target.value;
-                                    if (!e.target.value.includes("https://") && e.target.value !== "none") val = "https://" + val;
-                                    newLinks[i] = { "default": newLinks[i].default, "is_default": false, "path": val };
-                                    customLink.value = val;
-                                }
-                                chrome.storage.sync.set({ "custom_cards_2": { ...storage.custom_cards_2, [key]: { ...storage.custom_cards_2[key], "links": newLinks } } })
-                            });
-                        });
-                    }
-                };
-            });
-        } else {
-            document.querySelector(".advanced-cards").innerHTML = `<div class="option-container"><h3>Couldn't find your cards!<br/>You may need to refresh your Canvas page and/or this menu page.<br/><br/>If you're having issues please contact me - sandlerguy5@gmail.com</h3></div>`;
+        //             for (let i = 0; i < 4; i++) {
+        //                 let customLink = makeElement("input", container.querySelector(".custom-links"), { "className": "card-input" });
+        //                 customLink.value = card_2.links[i].is_default ? "default" : card_2.links[i].path;
+        //                 customLink.addEventListener("change", function (e) {
+        //                     chrome.storage.sync.get("custom_cards_2", storage => {
+        //                         let newLinks = storage.custom_cards_2[key].links;
+        //                         if (e.target.value === "" || e.target.value === "default") {
+        //                             console.log("this value is empty....")
+        //                             //newLinks[i] = { "type": storage.custom_cards_2[key].links.default[i].type, "default": true };
+        //                             newLinks[i] = { "default": newLinks[i].default, "is_default": true, "path": newLinks[i].default };
+        //                             customLink.value = "default";
+        //                         } else {
+        //                             //newLinks[i] = { "type": getLinkType(e.target.value), "path": e.target.value, "default": false };
+        //                             let val = e.target.value;
+        //                             if (!e.target.value.includes("https://") && e.target.value !== "none") val = "https://" + val;
+        //                             newLinks[i] = { "default": newLinks[i].default, "is_default": false, "path": val };
+        //                             customLink.value = val;
+        //                         }
+        //                         chrome.storage.sync.set({ "custom_cards_2": { ...storage.custom_cards_2, [key]: { ...storage.custom_cards_2[key], "links": newLinks } } })
+        //                     });
+        //                 });
+        //             }
+        //         };
+        //     });
+        // } else {
+        //     document.querySelector(".advanced-cards").innerHTML = `<div class="option-container"><h3>Couldn't find your cards!<br/>You may need to refresh your Canvas page and/or this menu page.<br/><br/>If you're having issues please contact me - sandlerguy5@gmail.com</h3></div>`;
+        // }
+
+		const cardGrid = document.getElementById("card-grid");
+        if (!cardGrid) {
+            console.error("Card grid element not found");
+            return;
         }
+        
+        cardGrid.innerHTML = "";
+        const customCards = storage.custom_cards || {};
+        const customCards2 = storage.custom_cards_2 || {};
+        const allCards = { ...customCards, ...customCards2 };
+        
+        if (Object.keys(allCards).length === 0) {
+            cardGrid.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">No course cards found. Visit your Canvas dashboard to load courses.</p>';
+            return;
+        }
+
+        Object.keys(allCards).forEach(courseId => {
+            const course = allCards[courseId];
+            if (course && typeof course === 'object') {
+                const courseButton = createCourseButton(courseId, course);
+                cardGrid.appendChild(courseButton);
+            }
+        });
+
+        const editMenu = document.getElementById("card-edit-menu");
+        if (editMenu) {
+            editMenu.style.display = "none";
+        }
+
+		document.getElementById("card-edit-menu").style.display = "none";
     });
+	sendFromPopup("getCards");
 }
 
-/*
-chrome.runtime.onMessage.addListener(message => {
-    if (message === "getCardsComplete") {
-        displayAdvancedCards();
-    }
-});
-*/
+function createCourseButton(courseId, courseData) {
+	const button = document.createElement("button");
+	button.className = "course-card-button";
+	button.textContent = courseData.name || `Course ${courseId}`;
+	button.dataset.courseId = courseId;
 
-/*
-syncedSwitches.forEach(function (option) {
-    let optionSwitch = document.querySelector('#' + option);
-    chrome.storage.sync.get(option, function (result) {
-        let status = result[option] === true ? "#on" : "#off";
-        optionSwitch.querySelector(status).checked = true;
-        optionSwitch.querySelector(status).classList.add('checked');
-    });
+	button.addEventListener("click", () => {
+		document.querySelectorAll(".course-card-button").forEach(btn => btn.classList.remove("active"));
+		button.classList.add("active");
+		showCardEditMenu(courseId, courseData);
+	});
 
-    optionSwitch.querySelector(".slider").addEventListener('mouseup', function () {
-        optionSwitch.querySelector("#on").checked = !optionSwitch.querySelector("#on").checked;
-        optionSwitch.querySelector("#on").classList.toggle('checked');
-        optionSwitch.querySelector("#off").classList.toggle('checked');
-        let status = optionSwitch.querySelector("#on").checked;
-        chrome.storage.sync.set({ [option]: status });
-        if (option === "auto_dark") {
-            toggleDarkModeDisable(status);
-        }
-    });
-});
-*/
+	return button;
+}
 
-/*
-localSwitches.forEach(option => {
-    let optionSwitch = document.querySelector('#' + option);
-    chrome.storage.local.get(option, function (result) {
-        let status = result[option] === true ? "#on" : "#off";
-        optionSwitch.querySelector(status).checked = true;
-        optionSwitch.querySelector(status).classList.add('checked');
-    });
-    optionSwitch.querySelector(".slider").addEventListener('mouseup', function () {
-        optionSwitch.querySelector("#on").checked = !optionSwitch.querySelector("#on").checked;
-        optionSwitch.querySelector("#on").classList.toggle('checked');
-        optionSwitch.querySelector("#off").classList.toggle('checked');
-        let status = optionSwitch.querySelector("#on").checked;
-        chrome.storage.local.set({ [option]: status });
+function showCardEditMenu(courseId, courseData) {
+	const editMenu = document.getElementById("card-edit-menu");
+	editMenu.style.display = "block";
 
-        /*
-        switch (option) {
-            case 'dark_mode': chrome.storage.local.set({ dark_mode: status }); sendFromPopup("darkmode"); break;
-        }
-        /
-    });
-});
-*/
+	editMenu.innerHTML = `
+        <div class="card-edit-header">
+            <h3 class="card-edit-title">${courseData.name || `Course ${courseId}`}</h3>
+            <button class="card-close-btn" onclick="hideCardEditMenu()">×</button>
+        </div>
+        
+        <div class="card-edit-section">
+            <label class="card-edit-label">Card Image URL</label>
+            <input type="text" class="card-input" id="card-image-input" 
+                   value="${courseData.img || ""}" placeholder="Enter image URL or 'none'">
+            <div class="card-image-preview" id="card-image-preview"></div>
+        </div>
+        
+        <div class="card-edit-section">
+            <label class="card-edit-label">Course Link</label>
+            <input type="text" class="card-input" id="card-link-input" 
+                   value="${courseData.link || ""}" placeholder="Enter custom link or 'none'">
+        </div>
+        
+        <div class="card-edit-section">
+            <label class="card-edit-label">Hide Card</label>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <input type="checkbox" id="card-hide-input" ${courseData.hide ? "checked" : ""}>
+                <span>Hide this card from dashboard</span>
+            </div>
+        </div>
+        
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+            <button class="big-button" onclick="saveCardChanges('${courseId}')">Save Changes</button>
+            <button class="customization-button" onclick="resetCardToDefault('${courseId}')">Reset to Default</button>
+        </div>
+    `;
+
+	updateImagePreview();
+	document.getElementById("card-image-input").addEventListener("input", updateImagePreview);
+}
+
+function updateImagePreview() {
+	const imageInput = document.getElementById("card-image-input");
+	const preview = document.getElementById("card-image-preview");
+
+	if (imageInput && preview) {
+		const imageUrl = imageInput.value;
+		if (imageUrl && imageUrl !== "none" && imageUrl.trim() !== "") {
+			preview.style.backgroundImage = `url(${imageUrl})`;
+			preview.style.display = "block";
+		} else {
+			preview.style.backgroundImage = "none";
+			preview.style.display = "none";
+		}
+	}
+}
+
+function saveCardChanges(courseId) {
+	const imageInput = document.getElementById("card-image-input");
+	const linkInput = document.getElementById("card-link-input");
+	const hideInput = document.getElementById("card-hide-input");
+
+	const updates = {
+		img: imageInput.value,
+		link: linkInput.value,
+		hide: hideInput.checked,
+	};
+
+	updateCards(courseId, updates);
+
+	displayAlert(false, "Card settings saved successfully!");
+
+	setTimeout(() => {
+		displayAdvancedCards();
+	}, 500);
+}
+
+function resetCardToDefault(courseId) {
+	updateCards(courseId, { img: "", link: "", hide: false });
+	displayAlert(false, "Card reset to default settings!");
+
+	setTimeout(() => {
+		displayAdvancedCards();
+	}, 500);
+}
+
+function hideCardEditMenu() {
+	document.getElementById("card-edit-menu").style.display = "none";
+
+	document.querySelectorAll(".course-card-button").forEach((btn) => {
+		btn.classList.remove("active");
+	});
+}
 
 function toggleDarkModeDisable(disabled) {
     let darkSwitch = document.querySelector('#dark_mode');
@@ -1726,54 +1791,6 @@ function getColorInGradient(d, from, to) {
     let rgb = a1.map((x, i) => Math.floor(a1[i] + d * (a2[i] - a1[i])));
     return "#" + componentToHex(rgb[0]) + componentToHex(rgb[1]) + componentToHex(rgb[2]);
 }
-
-/*
-function getColors(preset) {
-    console.log(preset)
-    Object.keys(preset).forEach(key => {
-        try {
-            let c = document.querySelector("#dp_" + key);
-            let color = c.querySelector('input[type="color"]');
-            let text = c.querySelector('input[type="text"]');
-            [color, text].forEach(changer => {
-                changer.value = preset[key];
-                changer.addEventListener("change", function (e) {
-                    changeCSS(key, e.target.value);
-                });
-            });
-        } catch (e) {
-            console.log("couldn't get " + key)
-            console.log(e);
-        }
-    });
-}
-*/
-
-/*
-function getColors2(data) {
-    const colors = data.split(":root")[1].split("--bcstop")[0];
-    const backgroundcolors = document.querySelector("#option-background");
-    const textcolors = document.querySelector("#option-text");
-    colors.split(";").forEach(function (color) {
-        const type = color.split(":")[0].replace("{", "").replace("}", "");
-        const currentColor = color.split(":")[1];
-        if (type) {
-            let container = makeElement("div", "changer-container", type.includes("background") ? backgroundcolors : textcolors);
-            let colorChange = makeElement("input", "card-input", container);
-            let colorChangeText = makeElement("input", "card-input", container);
-            colorChangeText.type = "text";
-            colorChangeText.value = currentColor;
-            colorChange.type = "color";
-            colorChange.value = currentColor;
-            [colorChange, colorChangeText].forEach(changer => {
-                changer.addEventListener("change", function (e) {
-                    changeCSS(type, e.target.value);
-                });
-            });
-        }
-    })
-}
-*/
 
 function displaySidebarMode(mode, style) {
     style = style.replace(" ", "");
@@ -1903,24 +1920,6 @@ function changeToPresetCSS(e, preset = null) {
 function applyPreset(preset) {
     chrome.storage.sync.set({ "dark_preset": preset }).then(() => refreshColors());
 }
-
-/*
-function setToDefaults() {
-    fetch(chrome.runtime.getURL('js/darkcss.json'))
-        .then((resp) => resp.json())
-        .then(function (result) {
-            chrome.storage.local.set({ "dark_css": result["dark_css"], "dark_preset": { "background-0": "#161616", "background-1": "#1e1e1e", "background-2": "#262626", "borders": "#3c3c3c", "text-0": "#f5f5f5", "text-1": "#e2e2e2", "text-2": "#ababab", "links": "#56Caf0", "sidebar": "#1e1e1e", "sidebar-text": "#f5f5f5" } }).then(() => refreshColors());
-        });
-}
-*/
-/*
-function makeElement(element, elclass, location, text) {
-    let creation = document.createElement(element);
-    creation.className = elclass;
-    creation.textContent = text;
-    location.appendChild(creation);
-    return creation
-}*/
 
 function makeElement(element, location, options) {
     let creation = document.createElement(element);

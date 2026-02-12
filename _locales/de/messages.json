@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Karten"
   },
-  "custom_font": {
-    "message": "Schriftarten"
+  "styles": {
+    "message": "Stile"
   },
   "useddmm": {
     "message": "Verwenden Sie tt/mm"

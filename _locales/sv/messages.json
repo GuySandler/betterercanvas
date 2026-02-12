@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Kort"
   },
-  "custom_font": {
-    "message": "Teckensnitt"
+  "styles": {
+    "message": "Stilar"
   },
   "useddmm": {
     "message": "Använd dd/mm"

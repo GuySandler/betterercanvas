@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Carte"
   },
-  "custom_font": {
-    "message": "Caratteri"
+  "styles": {
+    "message": "Stili"
   },
   "useddmm": {
     "message": "Usa gg/mm"
