@@ -79,7 +79,7 @@ chrome.runtime.onInstalled.addListener(function () {
             "cumulative_gpa": { "name": "Cumulative GPA", "hidden": false, "weight": "dnc", "credits": 999, "gr": 3.21 },
             "show_updates": false,
             "card_method_date": false,
-            "card_method_dashboard": false,
+            "card_method_dashboard": true,
             "card_limit": 25,
             "remind": false,
             "reminders": [],
