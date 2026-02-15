@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Карты"
   },
-  "custom_font": {
-    "message": "Шрифты"
+  "styles": {
+    "message": "Стили"
   },
   "useddmm": {
     "message": "Используйте дд/мм"

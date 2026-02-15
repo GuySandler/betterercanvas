@@ -2,17 +2,19 @@
 
 # Betterer Canvas
 
+name idea: even better canvas or Actually Better Canvas (ABC)
+
 I don't like the direction bettercanvas (bettercampus) is heading so I forked it
 
 They tried to change license but forgot to wipe the codebase for thier MIT licensed version, so this is a fully legal fork.
 
 Enhancements to Canvas AND bettercanvas like dark mode, better todo list, GPA calculator, and more!
 
-### Supported on
+<!-- ### Supported on -->
 
-![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
+<!-- ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) -->
 
-![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white)
+<!-- ![Firefox](https://img.shields.io/badge/Firefox-FF7139?style=for-the-badge&logo=Firefox-Browser&logoColor=white) -->
 
 ## Inquiries
 
@@ -55,25 +57,41 @@ Better Canvas introduces improvements to the Canvas user interface:
 ## Newly added features
 - GPA presets
 - Scheduled Reminder Popups (broken) 
-- searching themes (the original didn't actually impliment that)
+- Searching themes (the original didn't actually impliment that)
+- Card Styles (image size, card roundness, card spacing, width, height, theme compatible)
+- Custom Background (by URL, theme compatible)
 
-## Planned Features
-- custom backgrounds
-- custom side logo
+## Planned Features (by priority)
+- popup UI revamp
 - widgets (music, timer)
-- fix darkmode fixer
-- more card settings (Image Size, Roundness, Width, Space Between)
-- calender sync
-- update better todo list
+- update better todo list (with hover assignment preview)
 - better sidebar
-- flashcards
-- better calender
 - better notes
+- auto rotate theme + theme history + fix theme submissions
+- mail assistent + ui revamp
+- better calender (+ calender sync)
+- better what if grade
+- global search
+- fix darkmode fixer
+
+## Extra features that might be added:
+- card grade position, card outline
+- theme copy button
+- revamp cards page UI
+- streaks
+- caching pages for faster loading
+- liquid glass theme?
+- animated backgrounds, rotating background, time/weather reactive backgrounds, maybe chache if it becomes an issue
+- custom side logo
+- transcribe lecture (if there is demand for it)
+- flashcards
 - goals
-- auto rotate theme
-- theme history
-- mail assistent
-- transcribe lecture
+
+## Community suggestions (maybe will be done at some point)
+- when opening assignments it will show you "if you get a 0 on this your grade will be _"
+- quick modules button on cards
+- module sorting (newest, oldest) (maybe grid view)
+- grade leaderboard per class (opt in)
 
 ## Dev Installation
 
@@ -320,6 +338,10 @@ here is some proof the lisence was changed and this is based on the reverted MIT
 ## License
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC_BY--NC--SA_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+You can fork, modify, and use this code however you like with attributes, but no commercial use.
 
 ![Better Canvas](/icon/icon-48.png)
 

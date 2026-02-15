@@ -79,7 +79,7 @@ chrome.runtime.onInstalled.addListener(function () {
             "cumulative_gpa": { "name": "Cumulative GPA", "hidden": false, "weight": "dnc", "credits": 999, "gr": 3.21 },
             "show_updates": false,
             "card_method_date": false,
-            "card_method_dashboard": false,
+            "card_method_dashboard": true,
             "card_limit": 25,
             "remind": false,
             "reminders": [],
@@ -93,6 +93,13 @@ chrome.runtime.onInstalled.addListener(function () {
             "gpa_calc_weighted": true,
             "browser_show_likes": false,
             "custom_styles": "",
+            "imageSize": 100,
+            "cardRoundness": 5,
+            'cardSpacing': 0,
+            "cardWidth": 262,
+            "cardHeight": 250,
+            "customCardStyles": false,
+            "customBackgroundLink": "",
         }
     };
 
@@ -128,4 +135,4 @@ chrome.runtime.onInstalled.addListener(function () {
     });
 });
 
-chrome.runtime.setUninstallURL("https://diditupe.dev/bettercanvas/goodbye");
+// chrome.runtime.setUninstallURL("https://diditupe.dev/bettercanvas/goodbye");

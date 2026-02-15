@@ -43,8 +43,8 @@
                     <span data-i18n="themes">Themes</span>
                 </button>
                 <button id="custom-font-btn" class="big-button tab-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 7v-2h13v2"></path><path d="M10 5v14"></path><path d="M12 19h-4"></path><path d="M15 13v-1h6v1"></path><path d="M18 12v7"></path><path d="M17 19h2"></path></svg>
-                    <span data-i18n="custom_font">Custom Font</span>
+                    <svg width="15px" height="15px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M15.5 8.5H15.51M10.5 7.5H10.51M7.5 11.5H7.51M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 13.6569 19.6569 15 18 15H17.4C17.0284 15 16.8426 15 16.6871 15.0246C15.8313 15.1602 15.1602 15.8313 15.0246 16.6871C15 16.8426 15 17.0284 15 17.4V18C15 19.6569 13.6569 21 12 21ZM16 8.5C16 8.77614 15.7761 9 15.5 9C15.2239 9 15 8.77614 15 8.5C15 8.22386 15.2239 8 15.5 8C15.7761 8 16 8.22386 16 8.5ZM11 7.5C11 7.77614 10.7761 8 10.5 8C10.2239 8 10 7.77614 10 7.5C10 7.22386 10.2239 7 10.5 7C10.7761 7 11 7.22386 11 7.5ZM8 11.5C8 11.7761 7.77614 12 7.5 12C7.22386 12 7 11.7761 7 11.5C7 11.2239 7.22386 11 7.5 11C7.77614 11 8 11.2239 8 11.5Z" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                    <span data-i18n="styles">Styles</span>
                 </button>
                 <button id="gpa-bounds-btn" class="big-button tab-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M22 9l-10 -4l-10 4l10 4l10 -4v6"></path><path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"></path></svg>
@@ -476,6 +476,14 @@
                         <input type="checkbox" id="export-gpa" />
                         <span>GPA settings</span>
                     </div>
+					<div class="sub-option">
+                        <input type="checkbox" id="export-customStyles" />
+                        <span>Custom card styles</span>
+                    </div>
+					<div class="sub-option">
+                        <input type="checkbox" id="export-background" />
+                        <span>Background image</span>
+                    </div>
                 </div>
                 <div style="flex: 1">
                     <textarea class="card-input" id="export-output" placeholder="Output"></textarea>
@@ -665,15 +673,71 @@
             <button class="big-button back-btn" data-i18n="back">Back</button>
         </div>
         <p class="option-container sub-text" style="margin: 5px 0">Enter <b>"none"</b> to hide images and links.<br>You may need to refresh the page to see some changes.</p>
-        <div class="advanced-cards">
+        <!-- <div class="advanced-cards">
             <div id="advanced-current"></div>
             <div id="advanced-past"></div>
+        </div> -->
+		<div class="advanced-cards">
+			<div class="card-grid" id="card-grid">
+
+			</div>
+			<div class="card-edit-menu" id="card-edit-menu" style="display:none;">
+
+			</div>
+		</div>
+        <div class="option-container">
+            <h3 class="header-small">More Card Styles</h3>
+
+            <div class="sub-options">
+                <div class="sub-option" style="margin-top:5px">
+                    <input type="checkbox" id="customCardStyles" name="customCardStyles">
+                    <label for="customCardStyles" class="sub-text">Custom Card Styles</label>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Image Size</span>
+                        <input type="number" id="imageSize" class="card-input" min="0" max="300" value="1" style="width:80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Card Roundness</span>
+                        <input type="number" id="cardRoundness" class="card-input" min="0" max="300" value="1" style="width:80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Extra Card Spacing</span>
+                        <input type="number" id="cardSpacing" class="card-input" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Card Width</span>
+                        <input type="number" id="cardWidth" class="card-input" min="0" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+                <div class="sub-option">
+                    <div style="margin-top: 5px;display: flex;gap: 8px;align-items: center">
+                        <span class="sub-text" style="width:75px;">Card Height</span>
+                        <input type="number" id="cardHeight" class="card-input" min="0" max="300" value="1" style="width: 80px;">
+                        <span class="sub-text">px</span>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="option-container">
             <h3 class="header-small">Missing cards?</h3>
             <div style="display: flex; gap: 10px; align-items: center;">
                 <input type="checkbox" id="card_method_dashboard"></input>
-                <span>Enable alternative card method</span>
+                <span>Get Active Cards From Dashboard</span>
             </div>
         </div>
     </div>
@@ -698,9 +762,10 @@
     </div>
 
     <div class="custom-font-container tab" style="display:none">
+        <!-- TODO: make this a dropdown -->
         <div class="tab-header">
             <div>
-                <h2 style="margin-top: 0" data-i18n="custom_font">Custom Font</h2>
+                <h2 style="margin-top: 0" data-i18n="styles">Styles</h2>
             </div>
             <button class="big-button back-btn" data-i18n="back">Back</button>
         </div>
@@ -717,6 +782,13 @@
             <p>You can use a custom font from Google fonts here. Make sure to enter only the bold part after "?family="
             </p>
         </div>
+        <div class="custom-font option-container">
+            <h3 class="header-small">Custom Background</h3>
+            <p>Use an image url or upload an image file</p>
+            <input style="width:85%;" class="card-input" id="customBackgroundLink" placeholder="https://...">
+            <button id="clearCustomBackground" class="big-button" style="margin-top: 8px;">Clear Background</button>
+        </div>
+
     </div>
 
     <div class="card-colors-container tab" style="display:none">

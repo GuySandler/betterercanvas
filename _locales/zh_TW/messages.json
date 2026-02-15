@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "牌"
   },
-  "custom_font": {
-    "message": "字体"
+  "styles": {
+    "message": "样式"
   },
   "useddmm": {
     "message": "使用日/毫米"

@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Cards"
   },
-  "custom_font": {
-    "message": "Fonts"
+  "styles": {
+    "message": "Styles"
   },
   "useddmm": {
     "message": "Use dd/mm"
