@@ -10,7 +10,7 @@ They tried to change license but forgot to wipe the codebase for thier MIT licen
 
 Enhancements to Canvas AND bettercanvas like dark mode, better todo list, GPA calculator, and more!
 
-### Supported on
+<!-- ### Supported on -->
 
 <!-- ![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white) -->
 
