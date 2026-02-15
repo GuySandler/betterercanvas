@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Cartes"
   },
-  "custom_font": {
-    "message": "Polices de caractères"
+  "styles": {
+    "message": "Styles"
   },
   "useddmm": {
     "message": "Utiliser jj/mm"

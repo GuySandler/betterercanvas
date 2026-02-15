@@ -5,9 +5,10 @@ let grades = null;
 let announcements = [];
 let options = {};
 let timeCheck = null;
+let reminderCheck = null;
 //let assignmentData = null;
 
-/* 
+/*
 Start
 */
 
@@ -185,10 +186,38 @@ function showExampleReminder() {
     example.querySelector(".bettercanvas-reminder-due").textContent = "This notification will pop up in other pages to remind you of incomplete assignments that are due in less than 6 hours." /*It will notify again at 2 hours if the 'Remind 2x' option is on."*/;
 }
 
+async function ScheduledReminderCheck() {
+    let date = new Date();
+    let currentHour = date.getHours();
+    let currentMinute = date.getMinutes();
+    if (options.scheduledReminderTime) {
+        let [hour, minute] = options.scheduledReminderTime.split(":");
+        if (parseInt(hour) == currentHour && parseInt(minute) == currentMinute) {
+            const container = document.getElementById("bettercanvas-reminders") || makeElement("div", document.body, { "id": "bettercanvas-reminders" });
+            container.style.display = "flex";
+            container.textContent = "";
+            const storage = await chrome.storage.sync.get("reminders");
+            const now = (new Date()).getTime();
+            storage["reminders"].forEach(reminder => {
+                if (reminder.d >= now) {
+                    createReminder(reminder, container);
+                }
+            });
+        }
+    }
+}
+
+function toggleScheduledReminders() {
+    clearInterval(reminderCheck);
+    if (options.scheduledReminder !== true) return;
+    ScheduledReminderCheck();
+    reminderCheck = setInterval(ScheduledReminderCheck, 60000);
+}
+
 isDomainCanvasPage();
 
 function isDomainCanvasPage() {
-    chrome.storage.sync.get(['custom_domain', 'dark_mode', 'dark_preset', 'device_dark', 'remind'], result => {
+    chrome.storage.sync.get(['custom_domain', 'dark_mode', 'dark_preset', 'device_dark', 'remind', 'scheduledReminder', 'scheduledReminderTime'], result => {
         options = result;
         if (result.custom_domain.length && result.custom_domain[0] !== "") {
             for (let i = 0; i < result.custom_domain.length; i++) {
@@ -201,10 +230,15 @@ function isDomainCanvasPage() {
             // if the code reaches this point, its not a canvas page so run the reminders
             setTimeout(reminderWatch, 2000);
             setInterval(reminderWatch, 60000);
+            toggleScheduledReminders();
             // turn the reminders on/off if the option is changed
             chrome.storage.onChanged.addListener((changes) => {
                 Object.keys(changes).forEach(key => {
                     if (key === "remind") reminderWatch();
+                    if (key === "scheduledReminder" || key === "scheduledReminderTime") {
+                        options[key] = changes[key].newValue;
+                        toggleScheduledReminders();
+                    }
                 })
             })
         } else {
@@ -219,13 +253,18 @@ function startExtension() {
     chrome.storage.sync.get(null, result => {
         options = { ...options, ...result };
         toggleAutoDarkMode();
+        toggleScheduledReminders();
         getApiData();
         checkDashboardReady();
         loadCustomFont();
         applyAestheticChanges();
         changeFavicon();
         updateReminders();
+        applyCustomBackground();
+        
         //getClassAverages();
+        
+        setTimeout(() => document.getElementById("footer").remove(), 800);
         setTimeout(() => runDarkModeFixer(false), 800);
         setTimeout(() => runDarkModeFixer(false), 4500);
     });
@@ -326,8 +365,52 @@ function applyOptionsChanges(changes) {
             case ("remind"):
                 showExampleReminder();
                 break;
+			case ("scheduledReminder"):
+			case ("scheduledReminderTime"):
+				toggleScheduledReminders();
+				break;
+            case ("imageSize"):
+            case ("cardRoundness"):
+            case ("cardSpacing"):
+            case ("cardWidth"):
+            case ("cardHeight"):
+            case ("customCardStyles"):
+                applyAestheticChanges();
+                break;
+            case ("customBackgroundLink"):
+                applyCustomBackground();
+                break;
         }
     });
+}
+
+function applyCustomBackground() {
+    // let style = document.querySelector("#DashboardCard_Container")
+    let style = document.querySelector("#bettercanvas-background") || document.createElement('style');
+    style.id = "bettercanvas-background";
+    
+    if (options.customBackgroundLink && options.customBackgroundLink !== "") {
+        style.textContent = `
+        #wrapper {
+            background-image: url('${options.customBackgroundLink}') !important;
+            background-size: cover !important;
+            background-attachment: fixed !important; 
+        }
+        .ic-Dashboard-header__layout { 
+            background: none !important;  
+            backdrop-filter: blur(10px) !important;
+            border-radius: 5px;
+        }
+        .bettercanvas-gpa-card {background: var(--bcbackground-0) !important;}
+        .bettercanvas-gpa {background: var(--bcbackground-0) !important;}
+        .ic-DashboardCard {background: var(--bcbackground-0) !important;}`; // todo: liquid glass?
+    }
+    
+    document.documentElement.appendChild(style);
+}
+function clearCustomBackground() {
+	let style = document.querySelector("#bettercanvas-background");
+	if (style) style.remove();
 }
 
 let insertTimer;
@@ -386,6 +469,7 @@ function recieveMessage(request, sender, sendResponse) {
         case ("getcolors"): sendResponse(getCardColors()); break;
         case ("inspect"): sendResponse(inspectDarkMode(true)); break;
         case ("fixdm"): sendResponse(runDarkModeFixer(true)); break;
+		case ("updateBackground"): clearCustomBackground(); sendResponse(true); break;
         default: sendResponse(true);
     }
 }
@@ -1260,11 +1344,40 @@ function autoDarkModeCheck() {
     }
 }
 
+async function ScheduledReminderCheck() {
+	let date = new Date();
+	let currentHour = date.getHours();
+	let currentMinute = date.getMinutes();
+	if (options.scheduledReminderTime) {
+		let [hour, minute] = options.scheduledReminderTime.split(":");
+		if (parseInt(hour) == currentHour && parseInt(minute) == currentMinute) {
+			const container = document.getElementById("bettercanvas-reminders") || makeElement("div", document.body, { "id": "bettercanvas-reminders" });
+			container.style.display = "flex";
+			container.textContent = "";
+			const storage = await chrome.storage.sync.get("reminders");
+			const now = (new Date()).getTime();
+			storage["reminders"].forEach(reminder => {
+				if (reminder.d >= now) {
+					createReminder(reminder, container);
+				}
+			});
+		}
+	}
+
+}
+
 function toggleAutoDarkMode() {
     clearInterval(timeCheck);
     if (options.auto_dark && options.auto_dark === false) return;
     autoDarkModeCheck();
     timeCheck = setInterval(autoDarkModeCheck, 60000);
+}
+
+function toggleScheduledReminders() {
+	clearInterval(reminderCheck);
+	if (options.scheduled_reminders === false) return; //TODO: add it to the options thing
+	ScheduledReminderCheck();
+	reminderCheck = setInterval(ScheduledReminderCheck, 60000);
 }
 
 let iframeObserver;
@@ -1931,6 +2044,15 @@ function applyAestheticChanges() {
     if (options.disable_color_overlay === true) style.textContent += ".ic-DashboardCard__header_hero{opacity: 0!important} .ic-DashboardCard__header-button-bg{opacity: 1!important}";
     if (options.hide_feedback === true) style.textContent += ".recent_feedback {display: none}";
     if (options.full_width === true) style.textContent += ".ic-Layout-wrapper{max-width:100%!important}";
+
+    if (options.customCardStyles === true) {
+        if (options.imageSize !== undefined && options.imageSize !== 100) style.textContent += `.ic-DashboardCard__header_image {transform: scale(${options.imageSize / 100})!important; }`;
+        if (options.cardRoundness !== undefined && options.cardRoundness !== 5) style.textContent += `.ic-DashboardCard {border-radius: ${options.cardRoundness}px!important;}`;
+        if (options.cardSpacing !== undefined && options.cardSpacing !== 0) style.textContent += `.ic-DashboardCard {margin-right: ${options.cardSpacing / 2}px!important; margin-bottom: ${options.cardSpacing / 2}px!important;}`;
+        if (options.cardWidth !== undefined && options.cardWidth !== 262) style.textContent += `.ic-DashboardCard {width: ${options.cardWidth}px!important;}`;
+        if (options.cardHeight !== undefined && options.cardHeight !== 250) style.textContent += `.ic-DashboardCard {height: ${options.cardHeight}px!important;}`;
+    }
+
     if (options.custom_styles !== "") style.textContent += options.custom_styles;
     document.documentElement.appendChild(style);
 }

@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "Cartões"
   },
-  "custom_font": {
-    "message": "Fontes"
+  "styles": {
+    "message": "Estilos"
   },
   "useddmm": {
     "message": "Usar dd/mm"

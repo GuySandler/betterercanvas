@@ -41,8 +41,8 @@
   "card_customization": {
     "message": "カード"
   },
-  "custom_font": {
-    "message": "フォント"
+  "styles": {
+    "message": "スタイル"
   },
   "useddmm": {
     "message": "を使用 dd/mm"
