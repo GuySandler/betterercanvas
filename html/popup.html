@@ -34,10 +34,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M4 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path><path d="M14 4m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path><path d="M4 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path><path d="M14 14m0 1a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1z"></path></svg>
                     <span data-i18n="card_customization">Card Customization</span>
                 </button>
-                <button id="card-colors-btn" class="big-button tab-btn">
+                <!-- <button id="card-colors-btn" class="big-button tab-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v2a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z"></path><path d="M19 6h1a2 2 0 0 1 2 2a5 5 0 0 1 -5 5l-5 0v2"></path><path d="M10 15m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v4a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z"></path></svg>
                     <span data-i18n="card_colors">Card Colors</span>
-                </button>
+                </button> -->
                 <button id="import-export-btn" class="big-button tab-btn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 21v-4a4 4 0 1 1 4 4h-4"></path><path d="M21 3a16 16 0 0 0 -12.8 10.2"></path><path d="M21 3a16 16 0 0 1 -10.2 12.8"></path><path d="M10.6 9a9 9 0 0 1 4.4 4.4"></path></svg>
                     <span data-i18n="themes">Themes</span>
@@ -54,10 +54,10 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 9v4"></path><path d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z"></path><path d="M12 16h.01"></path></svg>
                     <span data-i18n="report_issue">Report issue</span>
                 </button>
-                <button id="updates-btn" class="big-button tab-btn">
+                <!-- <button id="updates-btn" class="big-button tab-btn">
                     <svg  xmlns="http://www.w3.org/2000/svg"  width="15"  height="15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /><path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></svg>
                     <span data-i18n="updates">Updates</span>
-                </button>
+                </button> -->
             </div>
         <div class="options">
             <div class="options-left">
@@ -685,6 +685,15 @@
 
 			</div>
 		</div>
+
+        <div class="option-container">
+            <h3 class="header-small">Missing cards?</h3>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <input type="checkbox" id="card_method_dashboard"></input>
+                <span>Get Active Cards From Dashboard</span>
+            </div>
+        </div>
+
         <div class="option-container">
             <h3 class="header-small">More Card Styles</h3>
 
@@ -733,71 +742,7 @@
                 </div>
             </div>
         </div>
-        <div class="option-container">
-            <h3 class="header-small">Missing cards?</h3>
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <input type="checkbox" id="card_method_dashboard"></input>
-                <span>Get Active Cards From Dashboard</span>
-            </div>
-        </div>
-    </div>
 
-    <div class="gpa-bounds-container tab" style="display:none">
-        <div class="tab-header">
-            <h2 style="margin-top: 0" data-i18n="gpa_settings">GPA Calculator Bounds</h2>
-            <button class="big-button back-btn" data-i18n="back">Back</button>
-        </div>
-        <div style="display: flex;gap: 8px;">
-            <div class="gpa-bounds option-container"></div>
-            <div class="gpa-bounds-explanation option-container">
-                The letter grade will be calculated as greater than or equal to the percentage given. <br><br>
-                If your school doesn't use the +/- system, you can enter 101 for those grades to remove them from the
-                calculation. (for example A+ = 101, A = 90, A- = 101)
-                <h3 class="header-small" style="margin-top: 20px;">GPA Scale Presets 0-4</h3>
-                <button class="big-button" id="gpa-plus-minus">+/- GPA Scale</button>
-                <button class="big-button" id="gpa-by-letter">By Letter GPA Scale</button>
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="custom-font-container tab" style="display:none">
-        <!-- TODO: make this a dropdown -->
-        <div class="tab-header">
-            <div>
-                <h2 style="margin-top: 0" data-i18n="styles">Styles</h2>
-            </div>
-            <button class="big-button back-btn" data-i18n="back">Back</button>
-        </div>
-        <div>
-            <div class="quick-fonts-container">
-                <div class="option-container">
-                    <h3 class="header-small">Popular Fonts</h3>
-                    <div id="quick-fonts"></div>
-                </div>
-            </div>
-        </div>
-        <div class="custom-font option-container">
-            <h3 class="header-small">Custom Font</h3>
-            <p>You can use a custom font from Google fonts here. Make sure to enter only the bold part after "?family="
-            </p>
-        </div>
-        <div class="custom-font option-container">
-            <h3 class="header-small">Custom Background</h3>
-            <p>Use an image url or upload an image file</p>
-            <input style="width:85%;" class="card-input" id="customBackgroundLink" placeholder="https://...">
-            <button id="clearCustomBackground" class="big-button" style="margin-top: 8px;">Clear Background</button>
-        </div>
-
-    </div>
-
-    <div class="card-colors-container tab" style="display:none">
-        <div class="tab-header">
-            <div>
-                <h2 style="margin-top: 0" data-i18n="card_colors">Card Color Palettes</h2>
-            </div>
-            <button class="big-button back-btn" data-i18n="back">Back</button>
-        </div>
         <div class="option-container">
             <p class="sub-text"><b>Disable High Contrast UI</b> if your colors become duller after refreshing! On the sidebar, if you click on your profile icon you can turn it off there.</p>
         </div>
@@ -927,6 +872,58 @@
         </div>
     </div>
 
+    <div class="gpa-bounds-container tab" style="display:none">
+        <div class="tab-header">
+            <h2 style="margin-top: 0" data-i18n="gpa_settings">GPA Calculator Bounds</h2>
+            <button class="big-button back-btn" data-i18n="back">Back</button>
+        </div>
+        <div style="display: flex;gap: 8px;">
+            <div class="gpa-bounds option-container"></div>
+            <div class="gpa-bounds-explanation option-container">
+                The letter grade will be calculated as greater than or equal to the percentage given. <br><br>
+                If your school doesn't use the +/- system, you can enter 101 for those grades to remove them from the
+                calculation. (for example A+ = 101, A = 90, A- = 101)
+                <h3 class="header-small" style="margin-top: 20px;">GPA Scale Presets 0-4</h3>
+                <button class="big-button" id="gpa-plus-minus">+/- GPA Scale</button>
+                <button class="big-button" id="gpa-by-letter">By Letter GPA Scale</button>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="custom-font-container tab" style="display:none">
+        <!-- TODO: make this a dropdown -->
+        <div class="tab-header">
+            <div>
+                <h2 style="margin-top: 0" data-i18n="styles">Styles</h2>
+            </div>
+            <button class="big-button back-btn" data-i18n="back">Back</button>
+        </div>
+        <div class="option-container">
+            <h3 class="header-small">
+                Dashboard Font
+                <!-- <button id="quick-fonts-dropdown-trigger" style="background:none;"> -->
+                    <svg src="../icon/dropdownArrow.svg" width="100px" height="100px"></svg>
+                <!-- </button> -->
+            </h3>
+            
+            <div id="quick-fonts"></div>
+
+            <div style="margin-top:10px;" class="custom-font">
+                <h3 class="header-small">Custom Font</h3>
+                <p>You can use a custom font from Google fonts here. Make sure to enter only the bold part after "?family="
+                </p>
+            </div>
+        </div>
+        <div class="custom-font option-container">
+            <h3 class="header-small">Custom Background</h3>
+            <p>Use an image url or upload an image file</p>
+            <input style="width:85%;" class="card-input" id="customBackgroundLink" placeholder="https://...">
+            <button id="clearCustomBackground" class="big-button" style="margin-top: 8px;">Clear Background</button>
+        </div>
+
+    </div>
+
     <div class="report-issue-container tab">
         <div class="tab-header">
             <div>
@@ -996,156 +993,6 @@
             </div>
         </div>
         <p>5.11.2</p>
-    </div>
-
-    <div class="updates-container tab">
-        <div class="tab-header">
-            <div>
-                <h2 style="margin-top: 0" data-i18n="updates">Updates</h2>
-            </div>
-            <button class="big-button back-btn" data-i18n="back">Back</button>
-        </div>
-        <div class="option-container" style="display:flex;gap:8px;">
-            <input type="checkbox" id="show_updates"></input>
-            <span>Show update messages on dashboard</span>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.11.2</h3>
-            <h4 class="update-date">Aug. 31, 2024</h4>
-            <ul>
-                <li>New themes</li>
-                <li>Updated menu</li>
-                <li>New sorting function for themes (score, color, alphabetical, date)</li>
-                <li>More troubleshooting features</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.10.10</h3>
-            <h4 class="update-date">Jul. 15, 2024</h4>
-            <ul>
-                <li>"Hide recent feedback" feature</li>
-                <li>"Color coded tab icons" feature</li>
-                <li>"Remove sidebar logo" feature</li>
-                <li>"Dark mode fixer" feature</li>
-                <li>"Use card colors" option for todo list</li>
-                <li>"Use device dark mode settings" option</li>
-                <li>Added more themes</li>
-                <li>Redesigned menu</li>
-                <li>Added cumulative GPA into GPA calculator</li>
-                <li>Done items section for todo list (click the "Todo" text to see)</li>
-                <li>Card colors now change instantly</li>
-                <li>Dark mode buttons preview their appearance</li>
-                <li>Dark mode now syncs across devices</li>
-                <li>New dark mode sidebar options</li>
-                <li>Card customization now shows preview of image</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.8.11</h3>
-            <h4 class="update-date">Jan. 8, 2024</h4>
-            <ul>
-                <li>Card customization now sorts by current/previous</li>
-                <li>Added "revert to original" for card colors</li>
-                <li>Improved dark mode customization tab</li>
-                <li>New import/export themes feature</li>
-                <li>Improved menu design</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.7.5</h3>
-            <h4 class="update-date">Sep. 8, 2023</h4>
-            <ul>
-                <li>New card color palletes feature</li>
-                <li>Updated gpa calculator interface</li>
-                <li>Added espanol language option</li>
-                <li>Added color picker input to dark mode customization</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.6.2</h3>
-            <h4 class="update-date">Jun. 17, 2023</h4>
-            <ul>
-                <li>Changes made in the menu no longer require refresh</li>
-                <li>Can now change items shown in better todo list</li>
-                <li>Added customizable GPA boundaries</li>
-                <li>Options now sync between devices</li>
-                <li>Added custom card links feature</li>
-                <li>Hover to preview details option</li>
-                <li>Disable color overlay option</li>
-                <li>New uninstall goodbye message</li>
-                <li>Added custom fonts feature</li>
-                <li>Welcome screen redesign</li>
-                <li>Menu redesign</li>
-                <li>New logo</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.5.1</h3>
-            <h4 class="update-date">Apr. 26, 2023</h4>
-            <ul>
-                <li>Corrected order of todo list announcements</li>
-                <li>GPA calculator now saves credits/weight</li>
-                <li>Hide completed assignments option</li>
-                <li>Added card customization feature</li>
-                <li>Card grade hover only option</li>
-                <li>Fixed card assignments bug</li>
-                <li>Dark mode improvements</li>
-                <li>More dark mode presets</li>
-                <li>Custom assignments
-                <li>Menu redesign</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.2.1</h3>
-            <h4 class="update-date">Feb. 2, 2023</h4>
-            <ul>
-                <li>Condensed cards feature</li>
-                <li>Fixed gradient cards</li>
-                <li>Fixed GPA calculator</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.1.4</h3>
-            <h4 class="update-date">Jan. 5, 2023</h4>
-            <ul>
-                <li>Improved URL setup</li>
-                <li>Added 24hr format option</li>
-                <li>GPA calculator moved to dashboard page</li>
-                <li>Dashboard grades moved to the card header</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 5.0.6</h3>
-            <h4 class="update-date">Oct. 21, 2022</h4>
-            <ul>
-                <li>Dark mode improvements</li>
-                <li>Can now enter multiple urls for the custom url</li>
-                <li>Quizzes link correctly in the assignments list</li>
-                <li>"Better todo list" feature</li>
-                <li>"Dashboard notes" feature</li>
-                <li>Optional dd/mm format for dashboard assignments</li>
-                <li>View dark mode changes in real time</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 4.2.1</h3>
-            <h4 class="update-date">Mar. 2, 2022</h4>
-            <ul>
-                <li>Removed assignment potentials and link preview features</li>
-                <li>Dark mode can now target iframes (better coverage)</li>
-                <li>Added dark mode presets</li>
-                <li>"Dashboard grades" feature</li>
-                <li>New welcome message</li>
-            </ul>
-        </div>
-        <div class="option-container">
-            <h3 class="header-small">Update 1.0.0</h3>
-            <h4 class="update-date">Oct. 17, 2021</h4>
-            <ul>
-                <li>First release :)</li>
-            </ul>
-        </div>
-        
     </div>
 
     <script type="text/javascript" src="../js/themes.js"></script>
