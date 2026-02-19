@@ -401,6 +401,11 @@ function applyCustomBackground() {
             backdrop-filter: blur(10px) !important;
             border-radius: 5px;
         }
+        #right-side-wrapper { 
+            background: color-mix(in srgb, var(--bcbackground-0) 45%, transparent) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 5px;
+        }
         .bettercanvas-gpa-card {background: var(--bcbackground-0) !important;}
         .bettercanvas-gpa {background: var(--bcbackground-0) !important;}
         .ic-DashboardCard {background: var(--bcbackground-0) !important;}`; // todo: liquid glass?
